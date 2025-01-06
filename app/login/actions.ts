@@ -54,15 +54,14 @@ export async function signInWithDiscord() {
   const supabase = await createClient();
 
   const redirectUrl =
-    process.env.NEXT_PUBLIC_APP_ENV === 'production'
+    process.env.NODE_ENV === 'production'
       ? 'https://chatter-space-rikcher.vercel.app/auth/callback?provider=discord'
       : 'http://localhost:3000/auth/callback?provider=discord';
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
-      redirectTo:
-        'https://chatter-space-rikcher.vercel.app/auth/callback?provider=discord', // Set the redirect URL after successful login
+      redirectTo: redirectUrl, // Set the redirect URL after successful login
     },
   });
 
