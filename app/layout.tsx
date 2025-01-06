@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
-import "./globals.css";
-import React from "react";
+import type { Metadata } from 'next';
+import { Open_Sans } from 'next/font/google';
+import './globals.css';
+import React from 'react';
 
-const font = Open_Sans({subsets: ['latin']})
+const font = Open_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Chatter Space",
-  description: "Chatter Space Application",
+  title: 'Chatter Space',
+  description: 'Chatter Space Application',
 };
 
 export default function RootLayout({
@@ -17,11 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${font.className} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${font.className} antialiased`}>{children}</body>
     </html>
   );
 }
