@@ -54,7 +54,7 @@ export async function signInWithDiscord() {
   const supabase = await createClient();
 
   const redirectUrl =
-    process.env.NODE_ENV === 'production'
+    process.env.NEXT_PUBLIC_APP_ENV === 'production'
       ? 'https://chatter-space-rikcher.vercel.app/auth/callback?provider=discord'
       : 'http://localhost:3000/auth/callback?provider=discord';
 
