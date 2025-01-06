@@ -61,7 +61,8 @@ export async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
-      redirectTo: redirectUrl, // Set the redirect URL after successful login
+      redirectTo:
+        'https://chatter-space-rikcher.vercel.app/auth/callback?provider=discord', // Set the redirect URL after successful login
     },
   });
 
