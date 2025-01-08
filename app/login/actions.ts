@@ -2,8 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
-import { createClient } from '@/shared/lib/utils';
+import { createClient, getURL } from '@/shared/lib/utils';
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -52,16 +51,12 @@ export async function signup(formData: FormData) {
 
 export async function signInWithDiscord() {
   const supabase = await createClient();
-
-  const redirectUrl =
-    process.env.NODE_ENV === 'production'
-      ? 'https://chatter-space-rikcher.vercel.app/auth/callback?provider=discord'
-      : 'http://localhost:3000/auth/callback?provider=discord';
+  const redirectUrl = `${getURL()}auth/callback?provider=discord`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
-      redirectTo: redirectUrl, // Set the redirect URL after successful login
+      redirectTo: redirectUrl,
     },
   });
 
