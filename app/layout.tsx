@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import React from 'react';
+import { Toaster } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const font = Open_Sans({ subsets: ['latin'] });
 
@@ -17,7 +19,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.className} antialiased`}>{children}</body>
+      <body
+        className={`${font.className} antialiased size-full overflow-hidden `}
+      >
+        <Toaster
+          position="bottom-center"
+          richColors
+          toastOptions={{
+            className: 'px-5 py-4 gap-2',
+          }}
+          icons={{
+            loading: <Loader2 className="animate-spin text-accent" />,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

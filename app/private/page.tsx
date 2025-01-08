@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { createClient } from '@/shared/lib/utils';
 import { Button } from '@/shared/shadcn-ui';
-import { signOut } from '@app/login/actions';
+import { signOut } from '@app/actions';
 
 export default async function PrivatePage() {
   const supabase = await createClient();
