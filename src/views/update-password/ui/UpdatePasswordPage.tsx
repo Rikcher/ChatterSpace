@@ -5,8 +5,7 @@ import UpdatePasswordForm from './UpdatePasswordForm';
 import { useSearchParams } from 'next/navigation';
 import { exchangeCodeForSession } from '@app/(authentication)/update-password/actions';
 import { toast } from 'sonner';
-import Link from 'next/link';
-import { Button } from '@/shared/shadcn-ui';
+import { GoBackButton } from '@/shared/ui/go-back-button';
 
 const UpdatePasswordPage = () => {
   const searchParams = useSearchParams();
@@ -39,9 +38,7 @@ const UpdatePasswordPage = () => {
         updated, you'll be able to log in with your new password right away.
       </p>
       <UpdatePasswordForm />
-      <Button className="bg-transparent w-full mt-5" variant="outline" asChild>
-        <Link href="/login">Back to login page</Link>
-      </Button>
+      <GoBackButton className="w-full mt-5" />
     </div>
   );
 };

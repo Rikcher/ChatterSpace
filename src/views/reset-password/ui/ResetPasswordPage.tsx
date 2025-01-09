@@ -1,7 +1,6 @@
 import React from 'react';
 import ResetPasswordForm from './ResetPasswordForm';
-import { Button } from '@/shared/shadcn-ui';
-import Link from 'next/link';
+import { GoBackButton } from '@/shared/ui/go-back-button';
 
 const ResetPasswordPage = () => {
   return (
@@ -15,9 +14,7 @@ const ResetPasswordPage = () => {
         how to set a new password.
       </p>
       <ResetPasswordForm />
-      <Button className="bg-transparent w-full mt-5" variant="outline" asChild>
-        <Link href="/login">Back to login page</Link>
-      </Button>
+      <GoBackButton className="w-full mt-5" />
     </div>
   );
 };
