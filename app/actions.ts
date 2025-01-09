@@ -1,8 +1,7 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { createClient, getURL } from '@/shared/lib/utils';
+import { createClient } from '@/shared/lib/utils';
 
 export async function signOut() {
   const supabase = await createClient();

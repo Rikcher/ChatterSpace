@@ -3,7 +3,7 @@ import LoginForm from './LoginForm';
 import { AuthHeader } from '@/shared/ui/auth-header';
 import { Separator } from '@/shared/shadcn-ui';
 import { OAuthLoginButton } from '@/widgets/oauth-login-button';
-import { CheckEmailDialog } from '@/widgets/check-email-dialog';
+import AuthAlertDialog from './AuthAlertDialog';
 
 const LoginPage: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
         <OAuthLoginButton provider="discord" />
         <OAuthLoginButton provider="google" />
       </div>
-      <CheckEmailDialog />
+      <AuthAlertDialog />
     </div>
   );
 };

@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
             Remember Me
           </CheckboxWithLabel>
           <Button variant="link" className="m-0 px-0" asChild>
-            <Link href={'#'}>Forgot password</Link>
+            <Link href={'/reset-password'}>Forgot password</Link>
           </Button>
         </div>
         <SubmitButton disabledWhileNotValid>Login</SubmitButton>
