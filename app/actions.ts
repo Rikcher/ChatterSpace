@@ -29,25 +29,6 @@ export async function signup(formData: FormData) {
   redirect('/private');
 }
 
-export async function signInWithDiscord() {
-  const supabase = await createClient();
-  const redirectUrl = `${getURL()}auth/callback?provider=discord`;
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'discord',
-    options: {
-      redirectTo: redirectUrl,
-    },
-  });
-
-  if (error) {
-    redirect('/error');
-  }
-
-  // This will redirect to Discord for authentication
-  return redirect(data.url);
-}
-
 export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut();

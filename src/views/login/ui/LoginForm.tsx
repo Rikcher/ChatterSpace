@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginFormType, LoginFormSchema } from '../model/loginFormSchema';
@@ -13,6 +13,9 @@ import { login } from '@app/(authentication)/login/actions';
 import { toast } from 'sonner';
 
 const LoginForm: React.FC = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
+
   const loginForm = useForm<LoginFormType>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
@@ -29,7 +32,7 @@ const LoginForm: React.FC = () => {
     <Form {...loginForm}>
       <form
         onSubmit={loginForm.handleSubmit(onSubmit)}
-        className="flex flex-col min-w-[25vw]"
+        className="flex flex-col"
       >
         <div className="flex flex-col gap-5">
           <InputField control={loginForm.control} name="email" label="Email" />
@@ -37,7 +40,11 @@ const LoginForm: React.FC = () => {
             control={loginForm.control}
             name="password"
             label="Password"
-            passwordVisibilityToggle
+            isPassword={{
+              passwordVisibilityToggle: true,
+              isPasswordVisible: passwordVisible,
+              onToggleVisibility: togglePasswordVisibility,
+            }}
           />
         </div>
         <div className="flex justify-between items-center mb-8 mt-2">

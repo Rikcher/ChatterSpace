@@ -1,7 +1,7 @@
 'use server';
 
 import React from 'react';
-import { Separator } from '@/shared/shadcn-ui';
+import { Blob } from '@/shared/ui/blob';
 import Image from 'next/image';
 
 interface AuthLayoutProps {
@@ -11,7 +11,12 @@ interface AuthLayoutProps {
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="w-screen h-screen flex justify-center items-center relative">
-      <div className="bg-card rounded-xl px-8 py-10 shadow-[0_0_60px_0_hsl(var(--primary-muted))]">
+      <Blob
+        size={1400}
+        duration={4000}
+        className="fixed right-[-300px] bottom-[-800px] z-[-1]"
+      />
+      <div className="bg-card rounded-xl px-14 py-16 min-w-[38rem]">
         {children}
       </div>
       <div className="absolute top-5 left-5 flex gap-3 items-center text-xl font-semibold tracking-wider">

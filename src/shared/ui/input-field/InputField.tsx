@@ -5,10 +5,10 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from "@/shared/shadcn-ui";
-import { Control, FieldValues, Path } from "react-hook-form";
-import { cn } from "@/shared/lib/utils";
-import PasswordVisibilityToggle from "./PasswordVisibilityToggle";
+} from '@/shared/shadcn-ui';
+import { Control, FieldValues, Path } from 'react-hook-form';
+import { cn } from '@/shared/lib/utils';
+import PasswordVisibilityToggle from './PasswordVisibilityToggle';
 
 interface InputFieldProps<T extends FieldValues> {
   control: Control<T>;
@@ -17,8 +17,12 @@ interface InputFieldProps<T extends FieldValues> {
   placeholder?: string;
   className?: string;
   inputClassName?: string;
-  passwordVisibilityToggle?: boolean;
   disabled?: boolean;
+  isPassword?: {
+    passwordVisibilityToggle?: boolean;
+    isPasswordVisible: boolean;
+    onToggleVisibility: () => void;
+  };
 }
 
 const InputField = <T extends FieldValues>({
@@ -28,29 +32,41 @@ const InputField = <T extends FieldValues>({
   placeholder,
   className,
   inputClassName,
-  passwordVisibilityToggle = false,
   disabled,
+  isPassword,
 }: InputFieldProps<T>) => {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn("", className)}>
+        <FormItem className={cn('', className)}>
           <FormLabel>{label}</FormLabel>
           <div className="relative">
             <FormControl>
               <Input
                 disabled={disabled}
+                type={
+                  isPassword
+                    ? isPassword?.isPasswordVisible
+                      ? 'text'
+                      : 'password'
+                    : 'text'
+                }
                 className={cn(
-                  `${name.startsWith("password") && "pr-12"}`,
-                  inputClassName,
+                  `${name.startsWith('password') && 'pr-12'}`,
+                  inputClassName
                 )}
                 placeholder={placeholder}
-                {...field} // Spread field props (value, onChange, etc.)
+                {...field}
               />
             </FormControl>
-            {passwordVisibilityToggle && <PasswordVisibilityToggle />}
+            {isPassword?.passwordVisibilityToggle && (
+              <PasswordVisibilityToggle
+                isVisible={isPassword?.isPasswordVisible}
+                onToggle={isPassword?.onToggleVisibility}
+              />
+            )}
           </div>
           <FormMessage />
         </FormItem>

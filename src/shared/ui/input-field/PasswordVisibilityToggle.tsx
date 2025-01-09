@@ -1,41 +1,23 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/shared/shadcn-ui';
 
-const PasswordVisibilityToggle: React.FC = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
+interface PasswordVisibilityToggleProps {
+  isVisible: boolean | undefined;
+  onToggle: (() => void) | undefined;
+}
 
-  const handlePasswordVisibility = () => {
-    const passwordInputs = document.querySelectorAll('input[name^="password"]');
-
-    passwordInputs.forEach((passwordInput) => {
-      passwordInput?.setAttribute(
-        'type',
-        passwordInput?.getAttribute('type') === 'password' ? 'text' : 'password'
-      );
-    });
-
-    setPasswordVisibility(!passwordVisibility);
-  };
-
-  useEffect(() => {
-    const passwordInputs = document.querySelectorAll('input[name^="password"]');
-
-    passwordInputs.forEach((passwordInput) => {
-      passwordInput?.setAttribute('type', 'password');
-    });
-  }, []);
-
+const PasswordVisibilityToggle: React.FC<PasswordVisibilityToggleProps> = ({
+  isVisible,
+  onToggle,
+}) => {
   return (
     <Button
       type="button"
-      id="passwordVisibility"
-      onClick={() => handlePasswordVisibility()}
-      className="absolute text-ring inset-y-0 right-0 px-3 [&_svg]:size-6 flex items-center select-none cursor-pointer bg-transparrent shadow-none hover:bg-transparrent"
+      onClick={onToggle}
+      className="absolute text-ring inset-y-0 right-0 px-3 [&_svg]:size-6 flex items-center select-none cursor-pointer bg-transparent shadow-none hover:bg-transparent"
     >
-      {passwordVisibility ? <Eye /> : <EyeOff />}
+      {isVisible ? <Eye /> : <EyeOff />}
     </Button>
   );
 };

@@ -48,7 +48,7 @@ body {
     --muted-foreground: 24 5.4% 63.9%;
     --accent: 12 6.5% 15.1%;
     --accent-foreground: 60 9.1% 97.8%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 359 80% 59%;
     --destructive-foreground: 60 9.1% 97.8%;
     --border: 20 0% 37%;
     --input: 20 0% 37%;
@@ -59,6 +59,8 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --radius: 0.5rem;
+    --loading: 240 5% 65%;
+    --loading-foreground: 240 10% 4%;
   }
   .light {
     --background: 0 0% 100%;
@@ -96,3 +98,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+
