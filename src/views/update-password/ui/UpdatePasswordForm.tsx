@@ -30,14 +30,7 @@ const UpdatePasswordForm = () => {
     const objToSend: UpdatePasswordFormPayloadType = {
       password: data.password,
     };
-
-    const response = (await updatePassword(objToSend)).message;
-
-    if (response === 'Password successfully updated') {
-      toast.success(response);
-    } else {
-      toast.error(response);
-    }
+    toast.error((await updatePassword(objToSend)).message);
   }
 
   return (

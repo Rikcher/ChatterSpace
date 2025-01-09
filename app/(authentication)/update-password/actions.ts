@@ -40,6 +40,4 @@ export async function exchangeCodeForSession(data: string) {
       message: `Failed to to exchange code: ${error.message}`,
     };
   }
-
-  return { message: 'Password successfully updated' };
 }
