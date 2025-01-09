@@ -26,5 +26,5 @@ export async function register(data: RegistrationFormPayloadType) {
   }
 
   revalidatePath('/', 'layout');
-  redirect('/private');
+  redirect('/login?checkEmail=true');
 }
