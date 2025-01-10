@@ -23,7 +23,7 @@ export async function login(data: LoginFormType) {
   }
 
   revalidatePath('/', 'layout');
-  redirect('/private');
+  redirect('/');
 }
 
 export async function oAuthSignIn(provider: 'discord' | 'google') {

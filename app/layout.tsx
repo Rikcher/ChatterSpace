@@ -3,6 +3,7 @@ import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import React from 'react';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/app';
 import { Loader2 } from 'lucide-react';
 
 const font = Open_Sans({ subsets: ['latin'] });
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${font.className} antialiased size-full overflow-hidden `}
       >
@@ -32,7 +33,14 @@ export default function RootLayout({
             loading: <Loader2 className="animate-spin text-accent" />,
           }}
         />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          storageKey="chatter-space-theme"
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

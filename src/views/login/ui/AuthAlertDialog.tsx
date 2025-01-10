@@ -38,6 +38,20 @@ const AuthAlertDialog: React.FC = () => {
       });
       setShowDialog(true);
       window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (searchParams?.get('failedLoginProvider') === 'true') {
+      setDialogContent({
+        title: 'Failed to login',
+        description: 'Could not login with provider',
+      });
+      setShowDialog(true);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (searchParams?.get('otpError') === 'true') {
+      setDialogContent({
+        title: 'Failed to login',
+        description: 'Could not verify OTP',
+      });
+      setShowDialog(true);
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [searchParams]);
 

@@ -28,7 +28,7 @@ export async function updatePassword(data: UpdatePasswordFormPayloadType) {
   }
 
   revalidatePath('/', 'layout');
-  redirect('/private');
+  redirect('/');
 }
 
 export async function exchangeCodeForSession(data: string) {
