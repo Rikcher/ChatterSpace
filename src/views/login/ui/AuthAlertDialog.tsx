@@ -19,7 +19,14 @@ const AuthAlertDialog: React.FC = () => {
     title: '',
     description: '',
   });
+  const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    setIsClient(true); // Set to true when mounted on the client side
+  }, []);
+
+  if (!isClient) return null;
 
   useEffect(() => {
     if (searchParams?.get('confirmRegistration') === 'true') {
