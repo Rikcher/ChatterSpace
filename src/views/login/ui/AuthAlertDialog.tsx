@@ -22,45 +22,66 @@ const AuthAlertDialog: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
 
+  // Ensure `useEffect` always runs, and manage client-side state inside it
   useEffect(() => {
     setIsClient(true); // Set to true when mounted on the client side
   }, []);
 
-  if (!isClient) return null;
-
+  // The logic to set the dialog content should only run after mounting on the client
   useEffect(() => {
-    if (searchParams?.get('confirmRegistration') === 'true') {
-      setDialogContent({
-        title: 'Check Your Email',
-        description:
-          "We've sent you a confirmation email. Please check your inbox and click the verification link to complete your registration.",
-      });
-      setShowDialog(true);
-      window.history.replaceState({}, document.title, window.location.pathname);
-    } else if (searchParams?.get('resetPassword') === 'true') {
-      setDialogContent({
-        title: 'Check Your Email',
-        description:
-          "We've sent you a password reset email. Please check your inbox and click the link to reset your password. If you don't see the email, make sure to check your spam or junk folder.",
-      });
-      setShowDialog(true);
-      window.history.replaceState({}, document.title, window.location.pathname);
-    } else if (searchParams?.get('failedLoginProvider') === 'true') {
-      setDialogContent({
-        title: 'Failed to login',
-        description: 'Could not login with provider',
-      });
-      setShowDialog(true);
-      window.history.replaceState({}, document.title, window.location.pathname);
-    } else if (searchParams?.get('otpError') === 'true') {
-      setDialogContent({
-        title: 'Failed to login',
-        description: 'Could not verify OTP',
-      });
-      setShowDialog(true);
-      window.history.replaceState({}, document.title, window.location.pathname);
+    if (isClient) {
+      if (searchParams?.get('confirmRegistration') === 'true') {
+        setDialogContent({
+          title: 'Check Your Email',
+          description:
+            "We've sent you a confirmation email. Please check your inbox and click the verification link to complete your registration.",
+        });
+        setShowDialog(true);
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      } else if (searchParams?.get('resetPassword') === 'true') {
+        setDialogContent({
+          title: 'Check Your Email',
+          description:
+            "We've sent you a password reset email. Please check your inbox and click the link to reset your password. If you don't see the email, make sure to check your spam or junk folder.",
+        });
+        setShowDialog(true);
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      } else if (searchParams?.get('failedLoginProvider') === 'true') {
+        setDialogContent({
+          title: 'Failed to login',
+          description: 'Could not login with provider',
+        });
+        setShowDialog(true);
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      } else if (searchParams?.get('otpError') === 'true') {
+        setDialogContent({
+          title: 'Failed to login',
+          description: 'Could not verify OTP',
+        });
+        setShowDialog(true);
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      }
     }
-  }, [searchParams]);
+  }, [searchParams, isClient]); // Include `isClient` and `searchParams` as dependencies
+
+  // If the page is not client-side, show a loading message
+  if (!isClient) return <div>Loading...</div>;
 
   return (
     <AlertDialog open={showDialog} onOpenChange={setShowDialog}>

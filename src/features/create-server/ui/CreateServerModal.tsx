@@ -19,7 +19,7 @@ interface CreateServerProps {}
 
 const CreateServerModal: React.FC<CreateServerProps> = ({}) => {
   return (
-    <Dialog open>
+    <Dialog>
       <DialogContent className="bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Customize your server</DialogTitle>
