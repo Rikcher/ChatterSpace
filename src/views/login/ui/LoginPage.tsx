@@ -3,11 +3,7 @@ import LoginForm from './LoginForm';
 import { AuthHeader } from '@/shared/ui/auth-header';
 import { Separator } from '@/shared/shadcn-ui';
 import { OAuthLoginButton } from '@/widgets/oauth-login-button';
-import dynamic from 'next/dynamic';
-
-const AuthAlertDialog = dynamic(() => import('./AuthAlertDialog'), {
-  ssr: false, // Disable server-side rendering
-});
+import AuthAlertDialog from './AuthAlertDialog';
 
 const LoginPage: React.FC = () => {
   return (
