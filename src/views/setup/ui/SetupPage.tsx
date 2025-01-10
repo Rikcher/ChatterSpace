@@ -1,8 +1,8 @@
 import React from 'react';
 import { db, initialProfile } from '@/shared/lib/utils';
 import { redirect } from 'next/navigation';
+import { CreateServerModal } from '@/features/create-server';
 import { LogoutButton } from '@/shared/ui/logout-button';
-import Image from 'next/image';
 
 const SetupPage = async () => {
   const profile = await initialProfile();
@@ -22,16 +22,10 @@ const SetupPage = async () => {
   }
 
   return (
-    <div>
-      <p>Create a server</p>
-      <Image
-        src={profile.imageUrl}
-        alt="user profile image"
-        width={200}
-        height={200}
-      ></Image>
+    <>
+      <CreateServerModal />;
       <LogoutButton />
-    </div>
+    </>
   );
 };
 export default SetupPage;
