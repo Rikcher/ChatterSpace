@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -19,86 +19,60 @@ const AuthAlertDialog: React.FC = () => {
     title: '',
     description: '',
   });
-  const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
 
-  // Ensure `useEffect` always runs, and manage client-side state inside it
   useEffect(() => {
-    setIsClient(true); // Set to true when mounted on the client side
-  }, []);
-
-  // The logic to set the dialog content should only run after mounting on the client
-  useEffect(() => {
-    if (isClient) {
-      if (searchParams?.get('confirmRegistration') === 'true') {
-        setDialogContent({
-          title: 'Check Your Email',
-          description:
-            "We've sent you a confirmation email. Please check your inbox and click the verification link to complete your registration.",
-        });
-        setShowDialog(true);
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-      } else if (searchParams?.get('resetPassword') === 'true') {
-        setDialogContent({
-          title: 'Check Your Email',
-          description:
-            "We've sent you a password reset email. Please check your inbox and click the link to reset your password. If you don't see the email, make sure to check your spam or junk folder.",
-        });
-        setShowDialog(true);
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-      } else if (searchParams?.get('failedLoginProvider') === 'true') {
-        setDialogContent({
-          title: 'Failed to login',
-          description: 'Could not login with provider',
-        });
-        setShowDialog(true);
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-      } else if (searchParams?.get('otpError') === 'true') {
-        setDialogContent({
-          title: 'Failed to login',
-          description: 'Could not verify OTP',
-        });
-        setShowDialog(true);
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-      }
+    if (searchParams?.get('confirmRegistration') === 'true') {
+      setDialogContent({
+        title: 'Check Your Email',
+        description:
+          "We've sent you a confirmation email. Please check your inbox and click the verification link to complete your registration.",
+      });
+      setShowDialog(true);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (searchParams?.get('resetPassword') === 'true') {
+      setDialogContent({
+        title: 'Check Your Email',
+        description:
+          "We've sent you a password reset email. Please check your inbox and click the link to reset your password. If you don't see the email, make sure to check your spam or junk folder.",
+      });
+      setShowDialog(true);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (searchParams?.get('failedLoginProvider') === 'true') {
+      setDialogContent({
+        title: 'Failed to login',
+        description: 'Could not login with provider',
+      });
+      setShowDialog(true);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (searchParams?.get('otpError') === 'true') {
+      setDialogContent({
+        title: 'Failed to login',
+        description: 'Could not verify OTP',
+      });
+      setShowDialog(true);
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, [searchParams, isClient]); // Include `isClient` and `searchParams` as dependencies
-
-  // If the page is not client-side, show a loading message
-  if (!isClient) return <div>Loading...</div>;
+  }, [searchParams]);
 
   return (
-    <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
-      <AlertDialogContent className="border border-solid border-border">
-        <AlertDialogHeader>
-          <AlertDialogTitle>{dialogContent.title}</AlertDialogTitle>
-          <AlertDialogDescription>
-            {dialogContent.description}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogAction asChild>
-            <Button onClick={() => setShowDialog(false)}>Got it</Button>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <Suspense fallback={<div className="hidden">Loading...</div>}>
+      <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
+        <AlertDialogContent className="border border-solid border-border">
+          <AlertDialogHeader>
+            <AlertDialogTitle>{dialogContent.title}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {dialogContent.description}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button onClick={() => setShowDialog(false)}>Got it</Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </Suspense>
   );
 };
 
