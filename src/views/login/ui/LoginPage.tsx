@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import LoginForm from './LoginForm';
 import { AuthHeader } from '@/shared/ui/auth-header';
 import { Separator } from '@/shared/shadcn-ui';
@@ -19,7 +19,9 @@ const LoginPage: React.FC = () => {
         <OAuthLoginButton provider="discord" />
         <OAuthLoginButton provider="google" />
       </div>
-      <AuthAlertDialog />
+      <Suspense>
+        <AuthAlertDialog />
+      </Suspense>
     </div>
   );
 };

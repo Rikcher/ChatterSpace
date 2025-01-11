@@ -1,26 +1,26 @@
 'use client';
 
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogFooter,
   AlertDialogAction,
+  Button,
   AlertDialogTitle,
   AlertDialogDescription,
-  Button,
 } from '@/shared/shadcn-ui';
 import { useSearchParams } from 'next/navigation';
 
 const AuthAlertDialog: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
+  const searchParams = useSearchParams();
+
   const [dialogContent, setDialogContent] = useState({
     title: '',
     description: '',
   });
-  const searchParams = useSearchParams();
-
   useEffect(() => {
     if (searchParams?.get('confirmRegistration') === 'true') {
       setDialogContent({
@@ -56,23 +56,21 @@ const AuthAlertDialog: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <Suspense fallback={<div className="hidden">Loading...</div>}>
-      <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
-        <AlertDialogContent className="border border-solid border-border">
-          <AlertDialogHeader>
-            <AlertDialogTitle>{dialogContent.title}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {dialogContent.description}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction asChild>
-              <Button onClick={() => setShowDialog(false)}>Got it</Button>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </Suspense>
+    <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
+      <AlertDialogContent className="border border-solid border-border">
+        <AlertDialogHeader>
+          <AlertDialogTitle>{dialogContent.title}</AlertDialogTitle>
+          <AlertDialogDescription>
+            {dialogContent.description}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction asChild>
+            <Button onClick={() => setShowDialog(false)}>Got it</Button>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 
