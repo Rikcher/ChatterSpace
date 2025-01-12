@@ -18,6 +18,13 @@ export const createServerModalFormSchema = z.object({
     ),
 });
 
+export const createNewServerPayload = z.object({
+  name: z.string().min(1),
+  imageUrl: z.string().min(1),
+});
+
 export type createServerModalFormType = z.infer<
   typeof createServerModalFormSchema
 >;
+
+export type createServerPayloadType = z.infer<typeof createNewServerPayload>;

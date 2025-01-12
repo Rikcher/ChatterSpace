@@ -55,3 +55,10 @@ export {
   DialogTitle,
   DialogDescription,
 } from './dialog';
+export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from './tooltip';
+export { ScrollArea, ScrollBar } from './scroll-area';

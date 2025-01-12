@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   createServerModalFormSchema,
   createServerModalFormType,
+  createNewServerPayload,
+  createServerPayloadType,
 } from '../model/createServerModalFormSchema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,8 +20,12 @@ import { InputField } from '@/shared/ui/input-field';
 import { SubmitButton } from '@/shared/ui/submit-button';
 import { SingleImageDropzone } from '@/shared/ui/single-image-dropzone';
 import { uploadImage } from '@/shared/lib/utils';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const CreateServerModalForm: React.FC = () => {
+  const router = useRouter();
+
   const createServerModalForm = useForm<createServerModalFormType>({
     resolver: zodResolver(createServerModalFormSchema),
     defaultValues: {
@@ -42,8 +48,20 @@ const CreateServerModalForm: React.FC = () => {
       }
 
       if (publicUrl) {
-        console.log('Image uploaded successfully:', publicUrl);
-        //todo: server creation
+        const payload: createServerPayloadType = {
+          name: data.name,
+          imageUrl: publicUrl,
+        };
+
+        try {
+          console.log(await axios.post('/api/servers', payload));
+
+          createServerModalForm.reset();
+          router.refresh();
+          window.location.reload();
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   };

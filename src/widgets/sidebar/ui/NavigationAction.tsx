@@ -1,0 +1,22 @@
+'use client';
+
+import React from 'react';
+import { Button } from '@/shared/shadcn-ui';
+import { Plus } from 'lucide-react';
+import { ActionTooltip } from '@/shared/ui/action-tooltip';
+
+interface NavigationActionProps {}
+
+const NavigationAction: React.FC<NavigationActionProps> = ({}) => {
+  return (
+    <div className="flex items-center">
+      <ActionTooltip side="right" align="center" label="Add a server">
+        <Button className="flex m-3 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background/60 hover:bg-primary text-foreground hover:text-background [&_svg]:size-5">
+          <Plus size={25} />
+        </Button>
+      </ActionTooltip>
+    </div>
+  );
+};
+
+export default NavigationAction;

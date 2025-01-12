@@ -3,13 +3,8 @@
 import React from 'react';
 import {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogClose,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
-  DialogFooter,
   DialogTitle,
   DialogDescription,
 } from '@/shared/shadcn-ui';
@@ -19,7 +14,7 @@ interface CreateServerProps {}
 
 const CreateServerModal: React.FC<CreateServerProps> = ({}) => {
   return (
-    <Dialog>
+    <Dialog open>
       <DialogContent className="bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Customize your server</DialogTitle>
