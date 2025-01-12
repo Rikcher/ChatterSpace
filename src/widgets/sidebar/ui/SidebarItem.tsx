@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 
 import { cn } from '@/shared/lib/utils';
-import SidebarAction from './SidebarAction';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
 import { Button } from '@/shared/shadcn-ui';
 

@@ -34,6 +34,7 @@ body {
 @layer base {
   :root {
     --background: 0 0% 100%;
+    --background-shade: 30 6% 7%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 25%;
@@ -64,6 +65,7 @@ body {
   }
   .dark {
     --background: 20 14.3% 4.1%;
+    --background-shade: 30 6% 7%;
     --foreground: 60 9.1% 97.8%;
     --card: 20 0% 12%;
     --card-foreground: 0 0% 25%;

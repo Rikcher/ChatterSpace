@@ -5,6 +5,8 @@ import { currentProfile, db } from '@/shared/lib/utils';
 import { Separator, ScrollArea } from '@/shared/shadcn-ui';
 import SidebarAction from './SidebarAction';
 import SidebarItem from './SidebarItem';
+import { ThemeToggle } from '@/shared/ui/theme-toggle';
+import { UserControl } from '@/features/user-control';
 
 const Sidebar = async () => {
   const profile = await currentProfile();
@@ -38,6 +40,10 @@ const Sidebar = async () => {
           </div>
         ))}
       </ScrollArea>
+      <div className="pb-3 mt-auto flex items-center flex-col gap-4">
+        <ThemeToggle />
+        <UserControl />
+      </div>
     </div>
   );
 };
