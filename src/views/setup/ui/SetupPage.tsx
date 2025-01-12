@@ -1,7 +1,8 @@
 import React from 'react';
-import { db, initialProfile } from '@/shared/lib/utils';
+import { db } from '@/shared/lib/utils';
+import { initialProfile } from '@/entities/user';
 import { redirect } from 'next/navigation';
-import { CreateServerModal } from '@/features/create-server';
+import { InitialServerModal } from '@/features/modal';
 import { LogoutButton } from '@/shared/ui/logout-button';
 
 const SetupPage = async () => {
@@ -23,7 +24,7 @@ const SetupPage = async () => {
 
   return (
     <>
-      <CreateServerModal />;
+      <InitialServerModal />;
       <LogoutButton />
     </>
   );

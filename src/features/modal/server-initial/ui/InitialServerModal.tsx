@@ -8,11 +8,11 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/shared/shadcn-ui';
-import CreateServerModalForm from './CreateServerModalForm';
+import InitialServerModalForm from './InitialServerModalForm';
 
 interface CreateServerProps {}
 
-const CreateServerModal: React.FC<CreateServerProps> = ({}) => {
+const InitialServerModal: React.FC<CreateServerProps> = ({}) => {
   return (
     <Dialog open>
       <DialogContent className="bg-card">
@@ -23,10 +23,10 @@ const CreateServerModal: React.FC<CreateServerProps> = ({}) => {
             always change it later.
           </DialogDescription>
         </DialogHeader>
-        <CreateServerModalForm />
+        <InitialServerModalForm />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default CreateServerModal;
+export default InitialServerModal;

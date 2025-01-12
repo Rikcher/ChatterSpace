@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { currentProfile } from '@/shared/lib/utils';
+import { currentProfile } from '../lib/current-profile';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';

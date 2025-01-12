@@ -4,6 +4,7 @@ import './globals.css';
 import React from 'react';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/app';
+import { ModalProvider } from '@/app/providers/modalProvider';
 import { Loader2 } from 'lucide-react';
 
 const font = Open_Sans({ subsets: ['latin'] });
@@ -39,6 +40,7 @@ export default function RootLayout({
           enableSystem={false}
           storageKey="chatter-space-theme"
         >
+          <ModalProvider />
           {children}
         </ThemeProvider>
       </body>

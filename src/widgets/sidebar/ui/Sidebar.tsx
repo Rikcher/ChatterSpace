@@ -1,12 +1,12 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
 
-import { currentProfile, db } from '@/shared/lib/utils';
+import { db } from '@/shared/lib/utils';
 import { Separator, ScrollArea } from '@/shared/shadcn-ui';
 import SidebarAction from './SidebarAction';
 import SidebarItem from './SidebarItem';
 import { ThemeToggle } from '@/shared/ui/theme-toggle';
-import { UserControl } from '@/features/user-control';
+import { UserControl, currentProfile } from '@/entities/user';
 
 const Sidebar = async () => {
   const profile = await currentProfile();

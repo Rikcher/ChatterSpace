@@ -4,7 +4,6 @@ import React from 'react';
 import {
   createServerModalFormSchema,
   createServerModalFormType,
-  createNewServerPayload,
   createServerPayloadType,
 } from '../model/createServerModalFormSchema';
 import { useForm } from 'react-hook-form';
@@ -22,9 +21,11 @@ import { SingleImageDropzone } from '@/shared/ui/single-image-dropzone';
 import { uploadImage } from '@/shared/lib/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useModal } from '../../lib/useModalStore';
 
 const CreateServerModalForm: React.FC = () => {
   const router = useRouter();
+  const { onClose } = useModal();
 
   const createServerModalForm = useForm<createServerModalFormType>({
     resolver: zodResolver(createServerModalFormSchema),
@@ -54,11 +55,11 @@ const CreateServerModalForm: React.FC = () => {
         };
 
         try {
-          console.log(await axios.post('/api/servers', payload));
+          await axios.post('/api/servers', payload);
 
           createServerModalForm.reset();
           router.refresh();
-          window.location.reload();
+          onClose();
         } catch (error) {
           console.log(error);
         }
