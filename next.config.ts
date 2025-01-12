@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/a/**', // Matches the path structure for Google profile pictures
       },
+      {
+        protocol: 'https',
+        hostname: 'hfyahiqwhtkmontdplnz.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/images/**', // Matches all images in the specified Supabase bucket
+      },
     ],
   },
 };

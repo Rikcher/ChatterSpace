@@ -2,8 +2,9 @@ import React from 'react';
 import { redirect } from 'next/navigation';
 
 import { currentProfile, db } from '@/shared/lib/utils';
-import NavigationAction from './NavigationAction';
 import { Separator, ScrollArea } from '@/shared/shadcn-ui';
+import SidebarAction from './SidebarAction';
+import SidebarItem from './SidebarItem';
 
 const Sidebar = async () => {
   const profile = await currentProfile();
@@ -24,9 +25,19 @@ const Sidebar = async () => {
 
   return (
     <div className="flex flex-col items-center h-full w-full bg-card py-3">
-      <NavigationAction />
+      <SidebarAction />
       <Separator className="h-[2px] rounded-md w-10 mx-auto my-2" />
-      <ScrollArea></ScrollArea>
+      <ScrollArea className="flex-1 w-full">
+        {servers.map((server) => (
+          <div key={server.id} className="my-2">
+            <SidebarItem
+              id={server.id}
+              name={server.name}
+              imageUrl={server.imageUrl}
+            />
+          </div>
+        ))}
+      </ScrollArea>
     </div>
   );
 };
