@@ -28,7 +28,7 @@ const Sidebar = async () => {
   return (
     <div className="flex flex-col items-center h-full w-full bg-card py-3">
       <SidebarAction />
-      <Separator className="h-[2px] rounded-md w-10 mx-auto my-2" />
+      <Separator className="h-[2px] rounded-md w-10 mx-auto mb-2" />
       <ScrollArea className="flex-1 w-full">
         {servers.map((server) => (
           <div key={server.id} className="my-2">

@@ -16,7 +16,7 @@ const UserControl = async () => {
   const profile = await currentProfile();
 
   if (!profile) {
-    return redirect('/');
+    return redirect('/login');
   }
 
   const imageUrl =
