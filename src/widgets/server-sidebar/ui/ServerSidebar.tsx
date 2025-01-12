@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation';
 import { db } from '@/shared/lib/utils';
 import { ChannelType } from '@prisma/client';
 
+import ServerHeader from './ServerHeader';
+
 interface ServerSidebarProps {
   serverId: string;
 }
@@ -55,7 +57,11 @@ const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
     (member) => member.profileId === profile.id
   )!.role;
 
-  return <div className="flex flex-col h-full w-full bg-card-shade"></div>;
+  return (
+    <div className="flex flex-col h-full w-full bg-card-shade">
+      <ServerHeader server={server} role={role} />
+    </div>
+  );
 };
 
 export default ServerSidebar;

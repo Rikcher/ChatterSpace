@@ -13,6 +13,7 @@ const ServerLayout = async ({
   params: { serverId: string };
 }) => {
   const profile = await currentProfile();
+  const { serverId } = await params;
 
   if (!profile) {
     return redirect('/login');
@@ -20,7 +21,7 @@ const ServerLayout = async ({
 
   const server = await db.server.findUnique({
     where: {
-      id: params.serverId,
+      id: serverId,
       members: {
         some: {
           profileId: profile.id,
