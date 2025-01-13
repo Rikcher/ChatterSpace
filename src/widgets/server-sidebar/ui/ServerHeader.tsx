@@ -8,17 +8,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuGroup,
-  DropdownMenuPortal,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup,
   Button,
 } from '@/shared/shadcn-ui';
 import {
@@ -30,7 +20,7 @@ import {
   UserPlus,
   Users,
 } from 'lucide-react';
-import { useModal } from '@/features/modal';
+import { useModal } from '@/shared/lib/hooks';
 
 interface ServerHeaderProps {
   server: ServerWithMembersWithProfiles;
@@ -74,7 +64,10 @@ const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
           </DropdownMenuItem>
         )}
         {isAdmin && (
-          <DropdownMenuItem className="text-foreground/65 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            className="text-foreground/65 px-3 py-2 text-sm cursor-pointer"
+            onClick={() => onOpen('editServer', { server })}
+          >
             Server Setting
             <Settings className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>

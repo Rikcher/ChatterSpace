@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from '@/shared/shadcn-ui';
 import CreateServerModalForm from './CreateServerModalForm';
-import { useModal } from '../../lib/useModalStore';
+import { useModal } from '@/shared/lib/hooks';
 
 interface CreateServerProps {}
 

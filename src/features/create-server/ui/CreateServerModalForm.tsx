@@ -21,7 +21,8 @@ import { SingleImageDropzone } from '@/shared/ui/single-image-dropzone';
 import { uploadImage } from '@/shared/lib/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useModal } from '../../lib/useModalStore';
+import { useModal } from '@/shared/lib/hooks';
+import { toast } from 'sonner';
 
 const CreateServerModalForm: React.FC = () => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const CreateServerModalForm: React.FC = () => {
       });
 
       if (error) {
-        console.error('Upload error:', error);
+        toast.error(`'Upload error:' ${error}`);
         return;
       }
 

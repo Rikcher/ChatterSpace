@@ -10,9 +10,8 @@ import {
   Input,
   Label,
 } from '@/shared/shadcn-ui';
-import { useModal } from '../../lib/useModalStore';
 import { Check, Copy, RefreshCw } from 'lucide-react';
-import { useOrigin } from '@/shared/lib/hooks';
+import { useOrigin, useModal } from '@/shared/lib/hooks';
 import axios from 'axios';
 
 interface CreateServerProps {}

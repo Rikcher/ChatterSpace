@@ -4,13 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 interface uploadImageProps {
   bucketName: string;
   filePath: string;
+  oldFilePath: string;
   image: File;
 }
 
-export const uploadImage = async ({
+export const changeImage = async ({
   bucketName,
   image,
   filePath,
+  oldFilePath,
 }: uploadImageProps) => {
   const supabase = clientCreateClient();
   const imageName = uuidv4();
@@ -26,6 +28,14 @@ export const uploadImage = async ({
   const { data: publicUrlData } = supabase.storage
     .from(bucketName)
     .getPublicUrl(`${filePath}/${imageName}`);
+
+  const { error: deleteError } = await supabase.storage
+    .from(bucketName)
+    .remove([oldFilePath]);
+
+  if (deleteError) {
+    console.warn(`Failed to delete old file: ${deleteError.message}`);
+  }
 
   return { publicUrl: publicUrlData.publicUrl };
 };

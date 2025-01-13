@@ -26,7 +26,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ id, imageUrl, name }) => {
     <div className="group relative flex items-center">
       <div
         className={cn(
-          'absolute left-0 bg-primary rounded-r-full transition w-[4px] transition-all duration-300',
+          'absolute left-0 bg-primary rounded-r-full w-[4px] transition-all duration-300',
           params?.serverId !== id && 'group-hover:h-[20px]',
           params?.serverId === id ? 'h-[36px]' : 'h-[8px]'
         )}
@@ -35,11 +35,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ id, imageUrl, name }) => {
         <Button
           onClick={onClick}
           className={cn(
-            'relative flex h-[48px] w-[48px] items-center mx-3 rounded-[24px] group-hover:rounded-[16px] overflow-hidden transition-all duration-300 bg-transparent hover:bg-transparent',
+            'relative flex h-[48px] w-[48px] p-0 items-center mx-3 rounded-[24px] group-hover:rounded-[16px] overflow-hidden transition-all duration-300 bg-transparent hover:bg-transparent',
             params?.serverId === id && 'rounded-[16px]'
           )}
         >
-          <Image fill src={imageUrl} alt="Channel" />
+          <Image fill src={imageUrl} alt="Channel" sizes="48px" />
         </Button>
       </ActionTooltip>
     </div>

@@ -198,7 +198,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
             <Image
               className="rounded-full object-cover aspect-square"
               src={imageUrl}
-              alt={acceptedFiles[0]?.name}
+              alt={acceptedFiles[0]?.name || 'Server image'}
               width={width}
               height={height}
             />

@@ -27,7 +27,7 @@ const UserControl = async () => {
       <ActionTooltip label={profile.username} side="right" align="center">
         <PopoverTrigger asChild>
           <Button className="relative flex h-[48px] w-[48px] items-center mx-3 rounded-full overflow-hidden transition duration-300 bg-transparent hover:bg-transparent">
-            <Image fill src={imageUrl} alt="Profile image" />
+            <Image fill src={imageUrl} alt="Profile image" sizes="48px" />
           </Button>
         </PopoverTrigger>
       </ActionTooltip>

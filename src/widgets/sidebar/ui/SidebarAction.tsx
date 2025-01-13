@@ -4,7 +4,7 @@ import React from 'react';
 import { Button } from '@/shared/shadcn-ui';
 import { Plus } from 'lucide-react';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
-import { useModal } from '@/features/modal';
+import { useModal } from '@/shared/lib/hooks';
 
 interface NavigationActionProps {}
 
