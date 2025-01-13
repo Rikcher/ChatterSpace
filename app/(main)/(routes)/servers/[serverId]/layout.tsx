@@ -10,10 +10,10 @@ const ServerLayout = async ({
   params,
 }: {
   children: React.ReactNode;
-  params: { serverId: string };
+  params: Promise<{ serverId: string }>;
 }) => {
   const profile = await currentProfile();
-  const { serverId } = await params;
+  const serverId = (await params).serverId;
 
   if (!profile) {
     return redirect('/login');
