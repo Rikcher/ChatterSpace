@@ -24,8 +24,7 @@ const SetupPage = async () => {
 
   return (
     <>
-      <InitialServerModal />;
-      <LogoutButton />
+      <InitialServerModal />
     </>
   );
 };

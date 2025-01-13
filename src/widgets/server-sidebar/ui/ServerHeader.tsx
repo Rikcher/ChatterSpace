@@ -79,7 +79,9 @@ const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
             <Settings className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
-        {isModerator && <DropdownMenuSeparator></DropdownMenuSeparator>}
+        {isModerator && (
+          <DropdownMenuSeparator className="my-[0.25rem]"></DropdownMenuSeparator>
+        )}
         {isAdmin && (
           <DropdownMenuItem className="text-destructive px-3 py-2 text-sm cursor-pointer">
             Delete Server
