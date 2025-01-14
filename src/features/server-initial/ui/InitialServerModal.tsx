@@ -10,9 +10,7 @@ import {
 } from '@/shared/shadcn-ui';
 import InitialServerModalForm from './InitialServerModalForm';
 
-interface CreateServerProps {}
-
-const InitialServerModal: React.FC<CreateServerProps> = ({}) => {
+const InitialServerModal: React.FC = ({}) => {
   return (
     <Dialog open>
       <DialogContent className="bg-card">

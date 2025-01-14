@@ -63,3 +63,4 @@ export {
 } from './tooltip';
 export { ScrollArea, ScrollBar } from './scroll-area';
 export { Popover, PopoverTrigger, PopoverContent } from './popover';
+export { Avatar, AvatarImage, AvatarFallback } from './avatar';

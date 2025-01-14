@@ -5,6 +5,7 @@ import {
   Button,
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   Input,
@@ -14,9 +15,7 @@ import { Check, Copy, RefreshCw } from 'lucide-react';
 import { useOrigin, useModal } from '@/shared/lib/hooks';
 import axios from 'axios';
 
-interface CreateServerProps {}
-
-const InviteModal: React.FC<CreateServerProps> = ({}) => {
+const InviteModal: React.FC = ({}) => {
   const { isOpen, onClose, onOpen, type, data } = useModal();
   const origin = useOrigin();
 
@@ -57,6 +56,9 @@ const InviteModal: React.FC<CreateServerProps> = ({}) => {
       <DialogContent className="bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Invite Friends</DialogTitle>
+          <DialogDescription className="hidden">
+            Send friend invite link
+          </DialogDescription>
         </DialogHeader>
         <Label className="uppercase text-xs font-bold">
           Server Invite Link

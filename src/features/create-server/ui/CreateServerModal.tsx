@@ -11,9 +11,7 @@ import {
 import CreateServerModalForm from './CreateServerModalForm';
 import { useModal } from '@/shared/lib/hooks';
 
-interface CreateServerProps {}
-
-const CreateServerModal: React.FC<CreateServerProps> = ({}) => {
+const CreateServerModal: React.FC = ({}) => {
   const { isOpen, onClose, type } = useModal();
 
   const isModalOpen = isOpen && type === 'createServer';
