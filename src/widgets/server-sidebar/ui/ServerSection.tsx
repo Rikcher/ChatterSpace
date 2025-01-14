@@ -28,7 +28,7 @@ const ServerSection: React.FC<ServerSectionProps> = ({
       {role !== MemberRole.GUEST && (
         <ActionTooltip label="Create Channel" side="top">
           <Button
-            className="flex h-auto text-foreground/60 bg-transparent p-1 rounded-full hover:bg-foreground/10"
+            className="flex h-auto text-foreground/60 bg-transparent p-1 rounded-full hover:bg-foreground/10 hover:text-foreground"
             onClick={() => onOpen('createChannel', { channelType })}
           >
             <Plus className="h-4 w-4" />

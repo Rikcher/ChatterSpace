@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/shared/shadcn-ui';
 import { cn } from '@/shared/lib/utils';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
+import { useModal } from '@/shared/lib/hooks';
 
 interface ServerChannelProps {
   channel: Channel;
@@ -25,6 +26,7 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
   server,
   role,
 }) => {
+  const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
 
@@ -53,7 +55,10 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
             <Edit className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors" />
           </ActionTooltip>
           <ActionTooltip label="Delete">
-            <Trash className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-destructive transition-colors" />
+            <Trash
+              onClick={() => onOpen('deleteChannel', { server, channel })}
+              className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-destructive transition-colors"
+            />
           </ActionTooltip>
         </div>
       )}
