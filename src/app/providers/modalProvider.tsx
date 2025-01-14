@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { ManageMembersModal } from '@/features/manage-members';
 import { CreateChannelModal } from '@/features/create-channel';
 import { LeaveServerModal } from '@/features/leave-server';
+import { DeleteServerModal } from '@/features/delete-server';
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -27,6 +28,7 @@ export const ModalProvider = () => {
       <ManageMembersModal />
       <CreateChannelModal />
       <LeaveServerModal />
+      <DeleteServerModal />
     </>
   );
 };
