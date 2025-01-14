@@ -48,7 +48,7 @@ const EditServerModalForm: React.FC = () => {
   const onSubmit = async (data: editServerModalFormType) => {
     const { dirtyFields } = createServerModalForm.formState;
 
-    let newImageUrl = server!.imageUrl; // Default to the existing URL
+    let newImageUrl = server!.imageUrl;
 
     if (dirtyFields.image && data.image) {
       const imageName = server?.imageUrl.replace(
@@ -60,7 +60,7 @@ const EditServerModalForm: React.FC = () => {
         bucketName: 'images',
         filePath: 'servers',
         image: data.image,
-        oldFilePath: `servers/${imageName}`, // Specify the old file path for deletion
+        oldFilePath: `servers/${imageName}`,
       });
 
       if (error) {
@@ -69,20 +69,20 @@ const EditServerModalForm: React.FC = () => {
       }
 
       if (publicUrl) {
-        newImageUrl = publicUrl; // Update to the new URL
+        newImageUrl = publicUrl;
       }
     }
 
     const payload: editServerPayloadType = {
       name: data.name,
-      imageUrl: newImageUrl, // Include the updated image URL
+      imageUrl: newImageUrl,
     };
 
     try {
       await axios.patch(`/api/servers/${server?.id}`, payload);
 
       createServerModalForm.reset();
-      router.refresh(); // Refresh the page to show the updated image
+      router.refresh();
       onClose();
     } catch (error) {
       console.log(error);

@@ -8,13 +8,13 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/shared/shadcn-ui';
-import CreateChannelModalForm from './CreateChannelModalForm';
+import EditChannelModalForm from './EditChannelModalForm';
 import { useModal } from '@/shared/lib/hooks';
 
-const CreateChannelModal: React.FC = ({}) => {
+const EditChannelModal: React.FC = ({}) => {
   const { isOpen, onClose, type } = useModal();
 
-  const isModalOpen = isOpen && type === 'createChannel';
+  const isModalOpen = isOpen && type === 'editChannel';
   const handleClose = () => {
     onClose();
   };
@@ -23,15 +23,15 @@ const CreateChannelModal: React.FC = ({}) => {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="bg-card">
         <DialogHeader className="mb-5">
-          <DialogTitle>Create Channel</DialogTitle>
+          <DialogTitle>Edit Channel</DialogTitle>
           <DialogDescription className="hidden">
             Create new channel fro your server
           </DialogDescription>
         </DialogHeader>
-        <CreateChannelModalForm />
+        <EditChannelModalForm />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default CreateChannelModal;
+export default EditChannelModal;

@@ -2,9 +2,9 @@
 
 import React, { useEffect } from 'react';
 import {
-  createChannelModalFormSchema,
-  createChannelModalFormType,
-} from '../model/createChannelModalFormSchema';
+  editChannelModalFormSchema,
+  editChannelModalFormType,
+} from '../model/editChannelModalFormSchema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import qs from 'query-string';
@@ -24,44 +24,42 @@ import {
 import { InputField } from '@/shared/ui/input-field';
 import { SubmitButton } from '@/shared/ui/submit-button';
 import axios from 'axios';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useModal } from '@/shared/lib/hooks';
 import { ChannelType } from '@prisma/client';
 
-const CreateChannelModalForm: React.FC = () => {
+const EditChannelModalForm: React.FC = () => {
   const router = useRouter();
-  const params = useParams();
   const { onClose, data } = useModal();
-  const { channelType } = data;
+  const { channel, server } = data;
 
-  const createChannelModalForm = useForm<createChannelModalFormType>({
-    resolver: zodResolver(createChannelModalFormSchema),
+  const editChannelModalForm = useForm<editChannelModalFormType>({
+    resolver: zodResolver(editChannelModalFormSchema),
     defaultValues: {
       name: '',
-      type: channelType || ChannelType.TEXT,
+      type: channel?.type || ChannelType.TEXT,
     },
   });
 
   useEffect(() => {
-    if (channelType) {
-      createChannelModalForm.setValue('type', channelType);
-    } else {
-      createChannelModalForm.setValue('type', ChannelType.TEXT);
+    if (channel) {
+      editChannelModalForm.setValue('name', channel.name);
+      editChannelModalForm.setValue('type', channel.type);
     }
-  }, [channelType, createChannelModalForm]);
+  }, [editChannelModalForm, channel]);
 
-  const onSubmit = async (data: createChannelModalFormType) => {
+  const onSubmit = async (data: editChannelModalFormType) => {
     try {
       const url = qs.stringifyUrl({
-        url: `/api/channels`,
+        url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: params?.serverId,
+          serverId: server?.id,
         },
       });
 
-      await axios.post(url, data);
+      await axios.patch(url, data);
 
-      createChannelModalForm.reset();
+      editChannelModalForm.reset();
       router.refresh();
       onClose();
     } catch (error) {
@@ -70,20 +68,20 @@ const CreateChannelModalForm: React.FC = () => {
   };
 
   return (
-    <Form {...createChannelModalForm}>
+    <Form {...editChannelModalForm}>
       <form
-        onSubmit={createChannelModalForm.handleSubmit(onSubmit)}
+        onSubmit={editChannelModalForm.handleSubmit(onSubmit)}
         className="flex flex-col"
       >
         <InputField
-          control={createChannelModalForm.control}
+          control={editChannelModalForm.control}
           name="name"
           label="Channel name"
           placeholder="Enter channel name"
           className="mb-5"
         />
         <FormField
-          control={createChannelModalForm.control}
+          control={editChannelModalForm.control}
           name="type"
           render={({ field }) => (
             <FormItem className="mb-10">
@@ -106,9 +104,9 @@ const CreateChannelModalForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <SubmitButton className="ml-auto px-6">Create channel</SubmitButton>
+        <SubmitButton className="ml-auto px-6">Save</SubmitButton>
       </form>
     </Form>
   );
 };
-export default CreateChannelModalForm;
+export default EditChannelModalForm;

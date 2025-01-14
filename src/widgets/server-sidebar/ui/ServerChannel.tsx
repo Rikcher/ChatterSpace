@@ -52,7 +52,10 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
       {channel.name !== 'general' && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-2">
           <ActionTooltip label="Edit">
-            <Edit className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors" />
+            <Edit
+              onClick={() => onOpen('editChannel', { server, channel })}
+              className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors"
+            />
           </ActionTooltip>
           <ActionTooltip label="Delete">
             <Trash
