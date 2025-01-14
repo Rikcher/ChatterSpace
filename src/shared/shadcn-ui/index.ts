@@ -64,3 +64,15 @@ export {
 export { ScrollArea, ScrollBar } from './scroll-area';
 export { Popover, PopoverTrigger, PopoverContent } from './popover';
 export { Avatar, AvatarImage, AvatarFallback } from './avatar';
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './select';
