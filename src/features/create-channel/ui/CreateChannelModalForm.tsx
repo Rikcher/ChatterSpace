@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   createChannelModalFormSchema,
   createChannelModalFormType,
@@ -31,15 +31,24 @@ import { ChannelType } from '@prisma/client';
 const CreateChannelModalForm: React.FC = () => {
   const router = useRouter();
   const params = useParams();
-  const { onClose } = useModal();
+  const { onClose, data } = useModal();
+  const { channelType } = data;
 
   const createChannelModalForm = useForm<createChannelModalFormType>({
     resolver: zodResolver(createChannelModalFormSchema),
     defaultValues: {
       name: '',
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
     },
   });
+
+  useEffect(() => {
+    if (channelType) {
+      createChannelModalForm.setValue('type', channelType);
+    } else {
+      createChannelModalForm.setValue('type', ChannelType.TEXT);
+    }
+  }, [channelType, createChannelModalForm]);
 
   const onSubmit = async (data: createChannelModalFormType) => {
     try {
