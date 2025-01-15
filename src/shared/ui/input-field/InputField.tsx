@@ -13,7 +13,7 @@ import PasswordVisibilityToggle from './PasswordVisibilityToggle';
 interface InputFieldProps<T extends FieldValues> {
   control: Control<T>;
   name: Path<T>;
-  label: string;
+  label?: string;
   placeholder?: string;
   className?: string;
   inputClassName?: string;
@@ -41,7 +41,7 @@ const InputField = <T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem className={cn('', className)}>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <div className="relative">
             <FormControl>
               <Input

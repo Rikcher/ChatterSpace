@@ -17,7 +17,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
     .replace(/[^a-zA-Z]/g, '')
     .substring(0, 1)
     .toUpperCase();
-  console.log(fallbackName, fallback);
+
   return (
     <Avatar className={cn('h-7 w-7 md:h-10 md:w-10', className)}>
       <AvatarImage src={src} />

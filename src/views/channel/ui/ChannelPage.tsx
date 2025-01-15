@@ -3,6 +3,8 @@ import { currentProfile } from '@/entities/user';
 import { redirect } from 'next/navigation';
 import { db } from '@/shared/lib/utils';
 import ChannelHeader from './ChannelHeader';
+import ChannelChat from './ChannelChat';
+import { ChannelMessageInput } from '@/features/send-channel-message';
 
 interface ChannelPageProps {
   params: Promise<{ serverId: string; channelId: string }>;
@@ -34,7 +36,13 @@ const ChannelPage: React.FC<ChannelPageProps> = async ({ params }) => {
 
   return (
     <div className="bg-card-shade-2 flex flex-col h-full">
-      <ChannelHeader name={channel.name} serverId={channel.serverId} />
+      <ChannelHeader name={channel.name} serverId={serverId} />
+      <ChannelChat channelId={channel.id} />
+      <ChannelMessageInput
+        channelId={channel.id}
+        serverId={serverId}
+        channelName={channel.name}
+      />
     </div>
   );
 };
