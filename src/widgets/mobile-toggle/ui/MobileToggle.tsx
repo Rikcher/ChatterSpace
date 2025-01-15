@@ -11,8 +11,9 @@ import {
 } from '@/shared/shadcn-ui';
 import { Sidebar } from '@/widgets/sidebar';
 import { ServerSidebar } from '@/widgets/server-sidebar';
+import { ConversationsSidebar } from '@/widgets/conversations-sidebar';
 
-const MobileToggle = ({ serverId }: { serverId: string }) => {
+const MobileToggle = ({ serverId }: { serverId?: string }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -30,7 +31,11 @@ const MobileToggle = ({ serverId }: { serverId: string }) => {
         <div className="w-[72px]">
           <Sidebar />
         </div>
-        <ServerSidebar serverId={serverId} />
+        {serverId ? (
+          <ServerSidebar serverId={serverId} />
+        ) : (
+          <ConversationsSidebar />
+        )}
       </SheetContent>
     </Sheet>
   );

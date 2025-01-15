@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { ScrollArea } from '@/shared/shadcn-ui';
 import { db } from '@/shared/lib/utils';
 import ConversationsHeader from './ConversationsHeader';
+import Conversation from '@/widgets/conversations-sidebar/ui/Conversation';
 
 const ConversationsSidebar = async () => {
   const profile = await currentProfile();
@@ -25,19 +26,21 @@ const ConversationsSidebar = async () => {
   return (
     <div className="flex flex-col h-full w-full bg-card-shade p-3">
       <ConversationsHeader />
-      <ScrollArea className=" flex-1 px-3">
+      <ScrollArea className="flex-1">
         {!!conversations?.length && (
           <div className="mb-2">
-            {conversations.map((conversation) => (
-              <div key={conversation.id}>
-                <p>
-                  With:{' '}
-                  {conversation.profileOneId === profile.id
-                    ? conversation.profileTwo?.username
-                    : conversation.profileOne?.username}
-                </p>
-              </div>
-            ))}
+            {conversations.map((conversation) => {
+              const otherProfile =
+                conversation.profileOne.id === profile.id
+                  ? conversation.profileTwo
+                  : conversation.profileOne;
+
+              return (
+                <div key={conversation.id}>
+                  <Conversation profile={otherProfile} />
+                </div>
+              );
+            })}
           </div>
         )}
       </ScrollArea>

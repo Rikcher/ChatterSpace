@@ -4,8 +4,6 @@ import { redirect } from 'next/navigation';
 import { db } from '@/shared/lib/utils';
 
 import { ScrollArea } from '@/shared/shadcn-ui';
-import ServerSection from './ServerSection';
-import { ChannelType } from '@prisma/client';
 import ServerMember from './ServerMember';
 
 interface ServerMembersSidebarProps {
@@ -43,10 +41,6 @@ const ServerMembersSidebar: React.FC<ServerMembersSidebarProps> = async ({
 
   const members = server.members;
 
-  const role = server.members.find(
-    (member) => member.profileId === profile.id
-  )!.role;
-
   return (
     <div className="flex flex-col h-full w-full bg-card-shade">
       <ScrollArea className=" flex-1 px-3">
@@ -56,7 +50,7 @@ const ServerMembersSidebar: React.FC<ServerMembersSidebarProps> = async ({
               {'Members'.toUpperCase()}
             </p>
             {members.map((member) => (
-              <ServerMember key={member.id} member={member} server={server} />
+              <ServerMember key={member.id} member={member} />
             ))}
           </div>
         )}

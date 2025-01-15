@@ -11,7 +11,7 @@ const ConversationsHeader = () => {
       <p className="text-xs font-semibold text-foreground/60">
         Direct Messages
       </p>
-      <ActionTooltip label="Start a conversation" side="top">
+      <ActionTooltip label="Create DM" side="top">
         <Button
           className="flex h-auto text-foreground/60 bg-transparent p-1 rounded-full hover:bg-foreground/10 hover:text-foreground"
           onClick={() => {}}
