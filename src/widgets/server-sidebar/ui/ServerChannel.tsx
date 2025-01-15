@@ -3,7 +3,7 @@
 import React from 'react';
 import { Channel, ChannelType, MemberRole, Server } from '@prisma/client';
 import { Edit, Hash, Lock, Mic, Trash, Video } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { Button } from '@/shared/shadcn-ui';
 import { cn } from '@/shared/lib/utils';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
@@ -28,8 +28,6 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
 }) => {
   const { onOpen } = useModal();
   const params = useParams();
-  const router = useRouter();
-
   const icon = iconMap[channel.type];
 
   return (

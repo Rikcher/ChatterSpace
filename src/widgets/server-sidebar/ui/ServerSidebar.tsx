@@ -2,29 +2,16 @@ import React from 'react';
 import { currentProfile } from '@/entities/user';
 import { redirect } from 'next/navigation';
 import { db } from '@/shared/lib/utils';
-import { ChannelType, MemberRole } from '@prisma/client';
+import { ChannelType } from '@prisma/client';
 
 import ServerHeader from './ServerHeader';
 import { ScrollArea } from '@/shared/shadcn-ui';
-import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from 'lucide-react';
-import ServerSection from '@/widgets/server-sidebar/ui/ServerSection';
-import ServerChannel from '@/widgets/server-sidebar/ui/ServerChannel';
+import ServerSection from './ServerSection';
+import ServerChannel from './ServerChannel';
 
 interface ServerSidebarProps {
   serverId: string;
 }
-
-const iconMap = {
-  [ChannelType.TEXT]: <Hash className="h-4 w-4" />,
-  [ChannelType.AUDIO]: <Mic className="h-4 w-4" />,
-  [ChannelType.VIDEO]: <Video className="h-4 w-4" />,
-};
-
-const roleIconMap = {
-  [MemberRole.GUEST]: null,
-  [MemberRole.MODERATOR]: <ShieldCheck className="w-4 h-4 text-indigo-500" />,
-  [MemberRole.ADMIN]: <ShieldAlert className="w-4 h-4 text-rose-500" />,
-};
 
 const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
   const profile = await currentProfile();
@@ -67,7 +54,6 @@ const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
   const videoChannels = server.channels.filter(
     (channel) => channel.type === ChannelType.VIDEO
   );
-  const members = server.members;
 
   const role = server.members.find(
     (member) => member.profileId === profile.id

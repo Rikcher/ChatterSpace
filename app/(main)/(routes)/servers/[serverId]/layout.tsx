@@ -3,7 +3,7 @@ import { currentProfile } from '@/entities/user';
 import { redirect } from 'next/navigation';
 import { db } from '@/shared/lib/utils';
 
-import { ServerSidebar } from '@/widgets/server-sidebar';
+import { ServerMembersSidebar, ServerSidebar } from '@/widgets/server-sidebar';
 
 const ServerLayout = async ({
   children,
@@ -39,7 +39,10 @@ const ServerLayout = async ({
       <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
         <ServerSidebar serverId={server.id} />
       </div>
-      <main className="h-full md:pl-60">{children}</main>
+      <main className="h-full md:px-60">{children}</main>
+      <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0 right-0">
+        <ServerMembersSidebar serverId={server.id} />
+      </div>
     </div>
   );
 };
