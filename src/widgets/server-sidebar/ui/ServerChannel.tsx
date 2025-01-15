@@ -3,11 +3,12 @@
 import React from 'react';
 import { Channel, ChannelType, MemberRole, Server } from '@prisma/client';
 import { Edit, Hash, Lock, Mic, Trash, Video } from 'lucide-react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/shared/shadcn-ui';
 import { cn } from '@/shared/lib/utils';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
 import { useModal } from '@/shared/lib/hooks';
+import { ModalType } from '@/shared/lib/hooks/useModalStore';
 
 interface ServerChannelProps {
   channel: Channel;
@@ -28,21 +29,35 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
 }) => {
   const { onOpen } = useModal();
   const params = useParams();
+  const router = useRouter();
   const icon = iconMap[channel.type];
+
+  const onCLick = () => {
+    router.push(`/servers/${params.serverId}/channels/${channel.id}`);
+  };
+
+  const onAction = (e: React.MouseEvent, action: ModalType) => {
+    e.stopPropagation();
+    onOpen(action, { channel, server });
+  };
 
   return (
     <Button
-      onClick={() => {}}
+      onClick={onCLick}
       className={cn(
-        'group px-2 py-2 rounded-md flex items-center gap-2 w-full bg-transparent text-foreground/60 justify-start hover:bg-foreground/5 [&_svg]:pointer-events-auto',
-        params?.channelId === channel.id && 'bg-primary'
+        'group px-2 py-2 rounded-md flex items-center gap-2 w-full bg-transparent text-foreground/30 justify-start [&_svg]:pointer-events-auto',
+        params?.channelId === channel.id
+          ? 'bg-foreground/20 text-foreground hover:bg-foreground/20'
+          : 'hover:bg-foreground/5'
       )}
     >
       {icon}
       <p
         className={cn(
-          'line-clamp-1 font-semibold text-xs text-foreground/60 group-hover:text-foreground transition-colors',
-          params?.channelId === channel.id && 'text-primary'
+          'line-clamp-1 font-semibold text-xs text-foreground/30 transition-colors',
+          params?.channelId === channel.id
+            ? 'text-foreground'
+            : 'group-hover:text-foreground/80'
         )}
       >
         {channel.name}
@@ -51,13 +66,13 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
         <div className="ml-auto flex items-center gap-2">
           <ActionTooltip label="Edit">
             <Edit
-              onClick={() => onOpen('editChannel', { server, channel })}
+              onClick={(e) => onAction(e, 'editChannel')}
               className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors"
             />
           </ActionTooltip>
           <ActionTooltip label="Delete">
             <Trash
-              onClick={() => onOpen('deleteChannel', { server, channel })}
+              onClick={(e) => onAction(e, 'deleteChannel')}
               className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-destructive transition-colors"
             />
           </ActionTooltip>
