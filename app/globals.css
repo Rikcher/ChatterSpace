@@ -38,6 +38,7 @@ body {
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
     --card-shade: 0 0% 21%;
+    --card-shade-2: 0 0% 16%;
     --card-foreground: 0 0% 25%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
@@ -70,6 +71,7 @@ body {
     --foreground: 60 9.1% 97.8%;
     --card: 20 0% 12%;
     --card-shade: 20 0% 17%;
+    --card-shade-2: 20 0% 20%;
     --card-foreground: 0 0% 25%;
     --popover: 20 14.3% 4.1%;
     --popover-foreground: 60 9.1% 97.8%;

@@ -14,6 +14,7 @@ export default {
         card: {
           DEFAULT: 'hsl(var(--card))',
           shade: 'hsl(var(--card-shade))',
+          'shade-2': 'hsl(var(--card-shade-2))',
           foreground: 'hsl(var(--card-foreground))',
         },
         popover: {

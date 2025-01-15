@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${font.className} antialiased size-full overflow-hidden `}
+        className={`${font.className} antialiased w-100% h-screen overflow-hidden `}
       >
         <Toaster
           position="bottom-center"
