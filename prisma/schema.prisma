@@ -14,9 +14,13 @@ model Profile {
   imageUrl String @db.Text
   email    String @db.Text
 
-  servers  Server[]
-  members  Member[]
-  channels Channel[]
+  servers        Server[]
+  members        Member[]
+  channels       Channel[]
+  directMessages DirectMessage[]
+
+  conversationsInitiated Conversation[] @relation("ProfileOne")
+  conversationsReceived  Conversation[] @relation("ProfileTwo")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -56,6 +60,8 @@ model Member {
   serverId String
   server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
+  messages Message[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -80,9 +86,72 @@ model Channel {
   serverId String
   server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
+  messages Message[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([profileId])
   @@index([serverId])
+}
+
+model Message {
+  id      String @id @default(uuid())
+  content String @db.Text
+
+  fileUrl String? @db.Text
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  channelId String
+  channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  deleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([channelId])
+  @@index([memberId])
+}
+
+model Conversation {
+  id String @id @default(uuid())
+
+  profileOneId String
+  profileOne   Profile @relation("ProfileOne", fields: [profileOneId], references: [id], onDelete: Cascade)
+
+  profileTwoId String
+  profileTwo   Profile @relation("ProfileTwo", fields: [profileTwoId], references: [id], onDelete: Cascade)
+
+  pinned Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  directMessages DirectMessage[]
+
+  @@unique([profileOneId, profileTwoId])
+  @@index([profileTwoId])
+}
+
+model DirectMessage {
+  id      String  @id @default(uuid())
+  content String  @db.Text
+  fileUrl String? @db.Text
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  deleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([conversationId])
 }

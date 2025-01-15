@@ -3,7 +3,8 @@ import { redirect } from 'next/navigation';
 
 import { db } from '@/shared/lib/utils';
 import { Separator, ScrollArea } from '@/shared/shadcn-ui';
-import SidebarAction from './SidebarAction';
+import AddServerAction from './AddServerAction';
+import ConversationsAction from './ConversationsAction';
 import SidebarItem from './SidebarItem';
 import { ThemeToggle } from '@/shared/ui/theme-toggle';
 import { UserControl, currentProfile } from '@/entities/user';
@@ -27,8 +28,9 @@ const Sidebar = async () => {
 
   return (
     <div className="flex flex-col items-center h-full w-full bg-card py-3">
-      <SidebarAction />
-      <Separator className="h-[2px] rounded-md w-10 mx-auto mb-2" />
+      <ConversationsAction />
+      <Separator className="h-[2px] rounded-md w-10 mx-auto mt-1 mb-3" />
+      <AddServerAction />
       <ScrollArea className="flex-1 w-full">
         {servers.map((server) => (
           <div key={server.id} className="my-2">
