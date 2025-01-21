@@ -6,10 +6,11 @@ import { UserAvatar } from '@/entities/user';
 import { Button } from '@/shared/shadcn-ui';
 import { Profile, type Conversation } from '@prisma/client';
 import { useParams, useRouter } from 'next/navigation';
-import { Pin } from 'lucide-react';
+import { Pin, Trash } from 'lucide-react';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { ModalType, useModal } from '@/shared/lib/hooks/useModalStore';
 
 interface ConversationProps {
   profile: Profile;
@@ -24,6 +25,7 @@ const Conversation: React.FC<ConversationProps> = ({
 }) => {
   const router = useRouter();
   const params = useParams();
+  const { onOpen } = useModal();
 
   const [isPinned, setPinned] = useState(
     conversation.pinned.includes(profileId)
@@ -45,6 +47,11 @@ const Conversation: React.FC<ConversationProps> = ({
     } catch (error) {
       toast.error(`Failed to toggle pin: ${error}`);
     }
+  };
+
+  const onDelete = (e: React.MouseEvent, action: ModalType) => {
+    e.stopPropagation();
+    onOpen(action, { profileId: profile.id });
   };
 
   return (
@@ -72,16 +79,23 @@ const Conversation: React.FC<ConversationProps> = ({
       >
         {profile.username}
       </p>
-
-      <ActionTooltip label="Pin conversation">
-        <Pin
-          onClick={(e) => onToggle(e)}
-          className={cn(
-            'hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors ml-auto',
-            isPinned && 'block text-foreground'
-          )}
-        />
-      </ActionTooltip>
+      <div className="ml-auto flex items-center gap-2">
+        <ActionTooltip label="Pin conversation">
+          <Pin
+            onClick={(e) => onToggle(e)}
+            className={cn(
+              'hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors ml-auto',
+              isPinned && 'block text-foreground'
+            )}
+          />
+        </ActionTooltip>
+        <ActionTooltip label="Delete">
+          <Trash
+            onClick={(e) => onDelete(e, 'deleteConversation')}
+            className="hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-destructive transition-colors"
+          />
+        </ActionTooltip>
+      </div>
     </Button>
   );
 };

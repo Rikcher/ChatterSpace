@@ -54,3 +54,37 @@ export async function PATCH(
     });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ profileId: string }> }
+) {
+  try {
+    const profile = await currentProfile();
+    const profileId = (await params).profileId;
+
+    if (!profile) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const conversation = await db.conversation.deleteMany({
+      where: {
+        OR: [
+          { profileOneId: profileId, profileTwoId: profile.id },
+          { profileOneId: profile.id, profileTwoId: profileId },
+        ],
+      },
+    });
+
+    if (!conversation) {
+      return new NextResponse('Conversation not found', { status: 404 });
+    }
+
+    return NextResponse.json(conversation);
+  } catch (error) {
+    console.log('[CONVERSATION_DELETE]', error);
+    return new NextResponse(`Internal Error ${error}`, {
+      status: 500,
+    });
+  }
+}
