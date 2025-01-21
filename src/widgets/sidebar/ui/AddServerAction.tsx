@@ -14,7 +14,7 @@ const AddServerAction: React.FC = ({}) => {
       <ActionTooltip side="right" align="center" label="Add a server">
         <Button
           onClick={() => onOpen('createServer')}
-          className="flex m-1 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background-shade hover:bg-primary text-foreground hover:text-background p-0"
+          className="flex m-3 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background-shade hover:bg-primary text-foreground hover:text-background p-0"
         >
           <Plus size={25} />
         </Button>

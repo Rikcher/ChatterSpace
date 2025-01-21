@@ -4,11 +4,12 @@ import React from 'react';
 import { Button } from '@/shared/shadcn-ui';
 import { MessageCircle } from 'lucide-react';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
-import { useModal } from '@/shared/lib/hooks';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { cn } from '@/shared/lib/utils';
 
 const ConversationsAction: React.FC = ({}) => {
   const router = useRouter();
+  const isActive = usePathname().startsWith('/conversations');
 
   const onClick = () => {
     router.push('/conversations');
@@ -19,7 +20,10 @@ const ConversationsAction: React.FC = ({}) => {
       <ActionTooltip side="right" align="center" label="Direct Messages">
         <Button
           onClick={onClick}
-          className="flex m-3 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background-shade hover:bg-primary text-foreground hover:text-background p-0"
+          className={cn(
+            'flex m-3 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background-shade hover:bg-primary text-foreground hover:text-background p-0',
+            isActive && 'rounded-[16px] bg-primary text-background'
+          )}
         >
           <MessageCircle size={20} />
         </Button>

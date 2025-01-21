@@ -27,10 +27,6 @@ export async function POST(
           { profileOneId: profile.id, profileTwoId: profileId },
         ],
       },
-      include: {
-        profileOne: true,
-        profileTwo: true,
-      },
     });
 
     if (!conversation) {
@@ -77,10 +73,6 @@ export async function PATCH(
           { profileOneId: profileId, profileTwoId: profile.id },
           { profileOneId: profile.id, profileTwoId: profileId },
         ],
-      },
-      include: {
-        profileOne: true,
-        profileTwo: true,
       },
     });
 
@@ -225,10 +217,6 @@ export async function DELETE(
           { profileOneId: profileId, profileTwoId: profile.id },
           { profileOneId: profile.id, profileTwoId: profileId },
         ],
-      },
-      include: {
-        profileOne: true,
-        profileTwo: true,
       },
     });
 

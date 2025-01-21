@@ -124,7 +124,7 @@ model Conversation {
   profileTwoId String
   profileTwo   Profile @relation("ProfileTwo", fields: [profileTwoId], references: [id], onDelete: Cascade)
 
-  pinned Boolean @default(false)
+  pinned String[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

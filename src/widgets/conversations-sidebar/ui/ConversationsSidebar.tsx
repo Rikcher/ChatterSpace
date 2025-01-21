@@ -37,7 +37,11 @@ const ConversationsSidebar = async () => {
 
               return (
                 <div key={conversation.id}>
-                  <Conversation profile={otherProfile} />
+                  <Conversation
+                    profile={otherProfile}
+                    profileId={profile.id}
+                    conversation={conversation}
+                  />
                 </div>
               );
             })}

@@ -7,30 +7,43 @@ import { useParams, useRouter } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
 import { Button } from '@/shared/shadcn-ui';
+import { UserAvatar } from '@/entities/user';
 
 interface SidebarItemProps {
   id: string;
   imageUrl: string;
   name: string;
+  type: 'server' | 'conversation';
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ id, imageUrl, name }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({
+  id,
+  imageUrl,
+  name,
+  type,
+}) => {
   const params = useParams();
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/servers/${id}`);
+    if (type === 'server') {
+      router.push(`/servers/${id}`);
+    } else {
+      router.push(`/conversations/${id}`);
+    }
   };
 
   return (
     <div className="group relative flex items-center">
-      <div
-        className={cn(
-          'absolute left-0 bg-primary rounded-r-full w-[4px] transition-all duration-300',
-          params?.serverId !== id && 'group-hover:h-[20px]',
-          params?.serverId === id ? 'h-[36px]' : 'h-[8px]'
-        )}
-      />
+      {type === 'server' && (
+        <div
+          className={cn(
+            'absolute left-0 bg-primary rounded-r-full w-[4px] transition-all duration-300',
+            params?.serverId !== id && 'group-hover:h-[20px]',
+            params?.serverId === id ? 'h-[36px]' : 'h-[8px]'
+          )}
+        />
+      )}
       <ActionTooltip side="right" align="center" label={name}>
         <Button
           onClick={onClick}
@@ -39,7 +52,15 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ id, imageUrl, name }) => {
             params?.serverId === id && 'rounded-[16px]'
           )}
         >
-          <Image fill src={imageUrl} alt="Channel" sizes="48px" />
+          {type === 'server' ? (
+            <Image fill src={imageUrl} alt="Channel" sizes="48px" />
+          ) : (
+            <UserAvatar
+              src={imageUrl}
+              fallbackName={name}
+              className="rounded-none h-[48px] w-[48px] md:h-[48px] md:w-[48px]"
+            />
+          )}
         </Button>
       </ActionTooltip>
     </div>
