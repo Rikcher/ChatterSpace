@@ -94,7 +94,7 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
           />
         ))}
         {data?.pages && !hasNextPage && !isFetchingNextPage && (
-          <ChatWelcome name={name} type="channel" />
+          <ChatWelcome name={name} chanelId={channelId} />
         )}
         {isFetchingNextPage && <NextPageSkeleton />}
       </div>
