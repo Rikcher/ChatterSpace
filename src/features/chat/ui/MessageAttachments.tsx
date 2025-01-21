@@ -9,10 +9,19 @@ export const MessageAttachments: React.FC<{
   attachments: string[];
   isOwner: boolean;
   message: MessageWithProfile;
-  serverId: string;
+  serverId?: string;
   isDeleted: boolean;
   setIsEdited: (isEdited: boolean) => void;
-}> = ({ attachments, isOwner, message, serverId, isDeleted, setIsEdited }) => {
+  otherProfileId?: string;
+}> = ({
+  attachments,
+  isOwner,
+  message,
+  serverId,
+  isDeleted,
+  setIsEdited,
+  otherProfileId,
+}) => {
   const { onOpen } = useModal();
 
   if (isDeleted) return null;
@@ -44,12 +53,20 @@ export const MessageAttachments: React.FC<{
             <ActionTooltip side="top" label="Delete image">
               <div
                 onClick={() => {
-                  onOpen('deleteMessage', {
-                    serverId: serverId,
-                    channelId: message.channelId,
-                    messageId: message.id,
-                    fileUrl: fileUrl,
-                  });
+                  if ('channelId' in message) {
+                    onOpen('deleteMessage', {
+                      serverId: serverId,
+                      channelId: message.channelId,
+                      messageId: message.id,
+                      fileUrl: fileUrl,
+                    });
+                  } else {
+                    onOpen('deleteMessage', {
+                      messageId: message.id,
+                      profileId: otherProfileId,
+                      fileUrl: fileUrl,
+                    });
+                  }
                   setIsEdited(true);
                 }}
                 className="hidden group-hover/image:flex absolute top-3 right-1 w-8 h-8 items-center justify-center p-2 bg-card text-white hover:bg-destructive border rounded-sm cursor-pointer"

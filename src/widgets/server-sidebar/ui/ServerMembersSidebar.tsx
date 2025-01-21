@@ -50,7 +50,11 @@ const ServerMembersSidebar: React.FC<ServerMembersSidebarProps> = async ({
               {'Members'.toUpperCase()}
             </p>
             {members.map((member) => (
-              <ServerMember key={member.id} member={member} />
+              <ServerMember
+                key={member.id}
+                member={member}
+                profileId={profile.id}
+              />
             ))}
           </div>
         )}

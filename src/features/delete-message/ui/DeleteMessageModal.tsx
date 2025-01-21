@@ -22,18 +22,35 @@ const DeleteMessageModal: React.FC = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isModalOpen = isOpen && type === 'deleteMessage';
-  const { serverId, channelId, messageId, fileUrl } = data;
+  const { serverId, channelId, messageId, fileUrl, profileId } = data;
 
   const onClick = async () => {
     try {
-      const url = qs.stringifyUrl({
-        url: `/api/channels/${channelId}/messages`,
-        query: {
-          serverId: serverId,
-          messageId: messageId,
-          fileUrl: fileUrl,
-        },
-      });
+      let url;
+
+      if (serverId && channelId) {
+        url = qs.stringifyUrl({
+          url: `/api/channels/${channelId}/messages`,
+          query: {
+            serverId: serverId,
+            messageId: messageId,
+            fileUrl: fileUrl,
+          },
+        });
+      } else if (profileId) {
+        url = qs.stringifyUrl({
+          url: `/api/conversations/${profileId}/messages`,
+          query: {
+            messageId: messageId,
+            fileUrl: fileUrl,
+          },
+        });
+      }
+
+      if (!url) {
+        console.error('Invalid url configuration!');
+        return;
+      }
 
       setIsLoading(true);
 

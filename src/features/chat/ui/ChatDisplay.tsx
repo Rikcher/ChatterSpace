@@ -8,14 +8,17 @@ import NextPageSkeleton from './NextPageSkeleton';
 import { useMessagesStore } from '../store/MessagesStore';
 import { useScrollHandler } from '../lib/useScrollHandler';
 import { useMessageSubscription } from '../lib/useMessageSubscription';
+import { useDirectMessageSubscription } from '../lib/useDirectMessageSubscription';
 
 interface ChannelChatProps {
-  channelId: string;
-  memberId: string;
-  serverId: string;
+  channelId?: string;
+  memberId?: string;
+  serverId?: string;
   profileId: string;
   name: string;
-  role: string;
+  role?: string;
+  conversationId?: string;
+  otherProfileId?: string;
 }
 
 const ChatDisplay: React.FC<ChannelChatProps> = ({
@@ -25,8 +28,10 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
   profileId,
   memberId,
   role,
+  conversationId,
+  otherProfileId,
 }) => {
-  const scrollAreaRef = useRef<HTMLDivElement | null>(null); // Update ref type to match Viewport
+  const scrollAreaRef = useRef<HTMLDivElement | null>(null);
   const { messages, addNextPage } = useMessagesStore();
 
   const {
@@ -36,7 +41,7 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useMessages({ channelId, serverId });
+  } = useMessages({ channelId, serverId, otherProfileId, conversationId });
 
   useEffect(() => {
     if (data?.pages) {
@@ -55,7 +60,11 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
     isLoading,
   });
 
-  useMessageSubscription({ channelId, memberId, profileId });
+  if (channelId && memberId) {
+    useMessageSubscription({ channelId, memberId, profileId });
+  } else if (conversationId) {
+    useDirectMessageSubscription({ profileId, conversationId });
+  }
 
   if (isFetching && isLoading) {
     return (
@@ -80,6 +89,8 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
             memberId={memberId}
             role={role}
             serverId={serverId}
+            profileId={profileId}
+            otherProfileId={otherProfileId}
           />
         ))}
         {data?.pages && !hasNextPage && !isFetchingNextPage && (

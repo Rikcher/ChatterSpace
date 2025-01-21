@@ -30,7 +30,8 @@ interface MessageEditFormProps {
   isDeleted: boolean;
   setEditing: (isEditing: boolean) => void;
   setIsEdited: (isEdited: boolean) => void;
-  serverId: string;
+  serverId?: string;
+  otherProfileId?: string;
 }
 
 const MessageEditForm: React.FC<MessageEditFormProps> = ({
@@ -40,6 +41,7 @@ const MessageEditForm: React.FC<MessageEditFormProps> = ({
   setEditing,
   setIsEdited,
   serverId,
+  otherProfileId,
 }) => {
   const { updateMessage } = useMessagesStore();
 
@@ -64,10 +66,21 @@ const MessageEditForm: React.FC<MessageEditFormProps> = ({
       message.fileUrls
     );
     try {
-      const url = qs.stringifyUrl({
-        url: `/api/channels/${message.channelId}/messages`,
-        query: { serverId },
-      });
+      let url;
+
+      if ('channelId' in message && serverId) {
+        url = qs.stringifyUrl({
+          url: `/api/channels/${message.channelId}/messages`,
+          query: { serverId },
+        });
+      } else if (otherProfileId) {
+        url = `/api/conversations/${otherProfileId}/messages`;
+      }
+
+      if (!url) {
+        console.error('Invalid url configuration!', url);
+        return;
+      }
 
       const objToSend = {
         content: trimmedContent,

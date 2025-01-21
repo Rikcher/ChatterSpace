@@ -23,6 +23,7 @@ interface ModalData {
   channelType?: ChannelType;
   messageId?: string;
   fileUrl?: string;
+  profileId?: string;
 }
 
 interface ModalStore {

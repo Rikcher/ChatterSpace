@@ -3,6 +3,7 @@ import { currentProfile } from '@/entities/user';
 import { redirect } from 'next/navigation';
 import { getOrCreateConversation } from '@/shared/lib/utils';
 import ConversationsHeader from './ConversationHeader';
+import { ChatDisplay, ChatMessageInput } from '@/features/chat';
 
 interface ConversationPageProps {
   params: Promise<{ profileId: string }>;
@@ -33,6 +34,18 @@ const ConversationPage: React.FC<ConversationPageProps> = async ({
       <ConversationsHeader
         imageUrl={otherProfile.imageUrl}
         name={otherProfile.username}
+      />
+      <ChatDisplay
+        name={otherProfile.username}
+        profileId={profile.id}
+        conversationId={conversation.id}
+        otherProfileId={otherProfile.id}
+      />
+      <ChatMessageInput
+        name={otherProfile.username}
+        profile={profile}
+        conversationId={conversation.id}
+        otherProfileId={otherProfile.id}
       />
     </div>
   );

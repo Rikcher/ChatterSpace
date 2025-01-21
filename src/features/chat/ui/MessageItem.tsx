@@ -16,9 +16,11 @@ const DATE_FORMAT = 'd MMM yyy, HH:mm';
 
 interface ChatItemProps {
   message: MessageWithProfile;
-  memberId: string;
-  role: string;
-  serverId: string;
+  memberId?: string;
+  role?: string;
+  serverId?: string;
+  profileId?: string;
+  otherProfileId?: string;
 }
 
 const MessageItem: React.FC<ChatItemProps> = ({
@@ -26,6 +28,8 @@ const MessageItem: React.FC<ChatItemProps> = ({
   memberId,
   role,
   serverId,
+  profileId,
+  otherProfileId,
 }) => {
   const { onOpen } = useModal();
   const {
@@ -38,7 +42,7 @@ const MessageItem: React.FC<ChatItemProps> = ({
     isOwner,
     canDeleteMessage,
     canEditMessage,
-  } = useMessageState(message, role, memberId);
+  } = useMessageState(message, role, memberId, profileId);
 
   return (
     <div className="relative group flex items-center hover:bg-background/5 p-4 transition-colors w-full">
@@ -55,9 +59,11 @@ const MessageItem: React.FC<ChatItemProps> = ({
               <p className="font-semibold text-sm hover:underline cursor-pointer">
                 {message.profile.username}
               </p>
-              <ActionTooltip side="top" label={message.role}>
-                {roleIconMap[message.role]}
-              </ActionTooltip>
+              {role && message.role && (
+                <ActionTooltip side="top" label={message.role}>
+                  {roleIconMap[message.role] ?? null}
+                </ActionTooltip>
+              )}
             </div>
             <span className="text-xs text-foreground/50">
               {format(new Date(message.createdAt), DATE_FORMAT)}
@@ -76,6 +82,7 @@ const MessageItem: React.FC<ChatItemProps> = ({
             isDeleted={isDeleted}
             setIsEdited={setIsEdited}
             serverId={serverId}
+            otherProfileId={otherProfileId}
           />
           <MessageAttachments
             attachments={attachments}
@@ -84,6 +91,7 @@ const MessageItem: React.FC<ChatItemProps> = ({
             serverId={serverId}
             isDeleted={isDeleted}
             setIsEdited={setIsEdited}
+            otherProfileId={otherProfileId}
           />
         </div>
       </div>
@@ -91,13 +99,22 @@ const MessageItem: React.FC<ChatItemProps> = ({
         canEditMessage={canEditMessage}
         canDeleteMessage={canDeleteMessage}
         onEdit={() => setEditing(true)}
-        onDelete={() =>
-          onOpen('deleteMessage', {
-            serverId: serverId,
-            channelId: message.channelId,
-            messageId: message.id,
-          })
-        }
+        onDelete={() => {
+          if ('channelId' in message) {
+            // Logic for Message
+            onOpen('deleteMessage', {
+              serverId: serverId,
+              channelId: message.channelId,
+              messageId: message.id,
+            });
+          } else {
+            // Logic for DirectMessage
+            onOpen('deleteMessage', {
+              messageId: message.id,
+              profileId: otherProfileId,
+            });
+          }
+        }}
       />
     </div>
   );

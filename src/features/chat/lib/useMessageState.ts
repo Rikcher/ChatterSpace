@@ -4,8 +4,9 @@ import { MemberRole } from '@prisma/client';
 
 export const useMessageState = (
   message: MessageWithProfile,
-  role: string,
-  memberId: string
+  role?: string,
+  memberId?: string,
+  profileId?: string
 ) => {
   const [isEditing, setEditing] = useState(false);
   const [isEdited, setIsEdited] = useState(
@@ -26,7 +27,9 @@ export const useMessageState = (
 
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = role === MemberRole.MODERATOR;
-  const isOwner = message.memberId === memberId;
+  const isOwner =
+    ('memberId' in message && message.memberId === memberId) ||
+    ('profileId' in message && message.profileId === profileId);
   const canDeleteMessage = !isDeleted && (isAdmin || isModerator || isOwner);
   const canEditMessage = !isDeleted && isOwner;
 

@@ -24,21 +24,25 @@ import { EmojiPicker } from '@/shared/ui/emoji-picker';
 import { useMessagesStore } from '../store/MessagesStore';
 
 interface ChannelMessageInputProps {
-  channelId: string;
-  memberId: string;
-  channelName: string;
-  serverId: string;
+  channelId?: string;
+  memberId?: string;
+  name: string;
+  serverId?: string;
   profile: Profile;
-  role: MemberRole;
+  role?: MemberRole;
+  conversationId?: string;
+  otherProfileId?: string;
 }
 
 const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
   channelId,
-  channelName,
+  name,
   memberId,
   serverId,
   profile,
   role,
+  conversationId,
+  otherProfileId,
 }) => {
   const {
     addMessage,
@@ -72,22 +76,47 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
     const now = new Date();
     if (files || trimmedContent) {
       //make placeholder message to instantly show user for better user experience
-      const placeholderMessage: MessageWithProfile = {
-        id: messageId,
-        content: trimmedContent,
-        fileUrls: previewImages.map((image) => image.url),
-        memberId: memberId,
-        channelId: channelId,
-        deleted: false,
-        createdAt: getTime(now),
-        updatedAt: getTime(now),
-        profile: {
-          imageUrl: profile.imageUrl,
-          username: profile.username,
-        },
-        role: role,
-        pending: true,
-      };
+      let placeholderMessage: MessageWithProfile | undefined;
+      if (channelId && memberId && role) {
+        placeholderMessage = {
+          id: messageId,
+          content: trimmedContent,
+          fileUrls: previewImages.map((image) => image.url),
+          memberId: memberId,
+          channelId: channelId,
+          deleted: false,
+          createdAt: getTime(now),
+          updatedAt: getTime(now),
+          profile: {
+            imageUrl: profile.imageUrl,
+            username: profile.username,
+          },
+          role: role,
+          pending: true,
+        };
+      } else if (conversationId) {
+        placeholderMessage = {
+          id: messageId,
+          content: trimmedContent,
+          fileUrls: previewImages.map((image) => image.url),
+          profileId: profile.id,
+          conversationId: conversationId,
+          deleted: false,
+          createdAt: getTime(now),
+          updatedAt: getTime(now),
+          profile: {
+            imageUrl: profile.imageUrl,
+            username: profile.username,
+          },
+          pending: true,
+        };
+      }
+
+      if (!placeholderMessage) {
+        console.error('Invalid message configuration!');
+        return;
+      }
+
       addMessage(placeholderMessage);
       addToPendingMessages(placeholderMessage.id);
       try {
@@ -128,10 +157,21 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
           messageId: messageId,
         };
 
-        const url = qs.stringifyUrl({
-          url: `/api/channels/${channelId}/messages`,
-          query: { serverId },
-        });
+        let url;
+
+        if (channelId && memberId && role) {
+          url = qs.stringifyUrl({
+            url: `/api/channels/${channelId}/messages`,
+            query: { serverId },
+          });
+        } else if (conversationId) {
+          url = `/api/conversations/${otherProfileId}/messages`;
+        }
+
+        if (!url) {
+          console.error('Invalid url configuration!');
+          return;
+        }
 
         await axios.post(url, objToSend);
         removeFromPendingMessages(placeholderMessage.id);
@@ -217,7 +257,7 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
                       style={{
                         lineHeight: '1.3rem',
                       }}
-                      placeholder={`Message #${channelName}`}
+                      placeholder={`Message ${channelId ? '#' : ''}${name}`}
                       autoComplete="off"
                       onInput={(event) => {
                         const textarea = event.target as HTMLTextAreaElement;

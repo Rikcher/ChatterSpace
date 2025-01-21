@@ -48,7 +48,7 @@ const ChannelPage: React.FC<ChannelPageProps> = async ({ params }) => {
         channelId={channel.id}
         memberId={member.id}
         serverId={serverId}
-        channelName={channel.name}
+        name={channel.name}
         profile={profile}
         role={member.role}
       />

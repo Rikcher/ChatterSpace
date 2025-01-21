@@ -1,11 +1,18 @@
-import { Server, Member, Profile, Message, MemberRole } from '@prisma/client';
+import {
+  Server,
+  Member,
+  Profile,
+  Message,
+  MemberRole,
+  DirectMessage,
+} from '@prisma/client';
 
 export type ServerWithMembersWithProfiles = Server & {
   members: (Member & { profile: Profile })[];
 };
 
-export type MessageWithProfile = Message & {
+export type MessageWithProfile = (Message | DirectMessage) & {
   profile: Pick<Profile, 'username' | 'imageUrl'>;
-  role: MemberRole;
+  role?: MemberRole;
   pending?: boolean;
 };

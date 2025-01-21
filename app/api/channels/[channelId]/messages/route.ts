@@ -191,7 +191,6 @@ export async function GET(
       return new NextResponse('Channel ID missing', { status: 400 });
     }
 
-    // Fetch server with members and channels in one query
     const server = await db.server.findFirst({
       where: {
         id: serverId,
@@ -204,10 +203,10 @@ export async function GET(
       include: {
         members: {
           include: {
-            profile: true, // Include profile with member data to avoid another query
+            profile: true,
           },
         },
-        channels: true, // Including channels just in case needed
+        channels: true,
       },
     });
 
@@ -215,7 +214,6 @@ export async function GET(
       return new NextResponse('Server not found', { status: 404 });
     }
 
-    // Check if the channel exists within the server
     const channel = server.channels.find((c) => c.id === channelId);
 
     if (!channel) {
@@ -239,7 +237,6 @@ export async function GET(
 
     const supabase = await createClient();
 
-    // Use supabase query for messages
     let query = supabase
       .from('Message')
       .select(
@@ -259,11 +256,9 @@ export async function GET(
       return new NextResponse(error.message, { status: 500 });
     }
 
-    // Return nextCursor if there are more results
     const nextCursor =
       data.length === limit ? data[data.length - 1].createdAt : null;
 
-    // Map messages with pre-fetched profile data from server.members
     const messagesWithProfile = data.map((message: Message) => {
       const member = server.members.find((m) => m.id === message.memberId);
       const profile = member?.profile || { username: 'Unknown', imageUrl: '' };
