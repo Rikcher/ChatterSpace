@@ -1,4 +1,4 @@
-export { cn, getURL, formatFileSize } from './utils';
+export { cn, getURL, formatFileSize, getTime } from './utils';
 export { updateSession } from './supabase/middleware';
 export { createClient } from './supabase/server';
 export { clientCreateClient } from './supabase/client';

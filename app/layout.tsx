@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/app';
 import { ModalProvider } from '@/app/providers/modalProvider';
 import { Loader2 } from 'lucide-react';
+import QueryProvider from '@/app/providers/queryProvider';
 
 const font = Open_Sans({ subsets: ['latin'] });
 
@@ -41,7 +42,7 @@ export default function RootLayout({
           storageKey="chatter-space-theme"
         >
           <ModalProvider />
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </ThemeProvider>
       </body>
     </html>

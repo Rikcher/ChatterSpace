@@ -96,10 +96,9 @@ model Channel {
 }
 
 model Message {
-  id      String @id @default(uuid())
-  content String @db.Text
-
-  fileUrl String? @db.Text
+  id       String   @id @default(uuid())
+  content  String?  @db.Text
+  fileUrls String[]
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -137,9 +136,9 @@ model Conversation {
 }
 
 model DirectMessage {
-  id      String  @id @default(uuid())
-  content String  @db.Text
-  fileUrl String? @db.Text
+  id       String   @id @default(uuid())
+  content  String?  @db.Text
+  fileUrls String[]
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)

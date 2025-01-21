@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { toZonedTime } from 'date-fns-tz';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,4 +26,8 @@ export function formatFileSize(bytes: number): string {
   const size: string = (bytes / Math.pow(1024, i)).toFixed(2);
 
   return `${size.replace(/\.00$/, '')}${sizes[i]}`;
+}
+
+export function getTime(now: Date) {
+  return toZonedTime(now, 'UTC');
 }
