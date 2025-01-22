@@ -8,7 +8,6 @@ import ConversationsAction from './ConversationsAction';
 import SidebarItem from './SidebarItem';
 import { ThemeToggle } from '@/shared/ui/theme-toggle';
 import { UserControl, currentProfile } from '@/entities/user';
-import { ScrollAreaScrollbar } from '@radix-ui/react-scroll-area';
 
 const Sidebar = async () => {
   const profile = await currentProfile();

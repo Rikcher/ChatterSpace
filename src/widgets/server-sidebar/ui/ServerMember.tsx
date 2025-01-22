@@ -15,7 +15,9 @@ import {
 } from '@/shared/shadcn-ui';
 
 interface ServerMemberProps {
-  member: Member & { profile: Profile };
+  member: Member & {
+    profile: { imageUrl: string; username: string; id: string };
+  };
   profileId: string;
 }
 
