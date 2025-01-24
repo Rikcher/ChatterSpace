@@ -41,11 +41,13 @@ const Conversation: React.FC<ConversationProps> = ({
 
   const onToggle = async (e: React.MouseEvent) => {
     e.stopPropagation();
+    setPinned(!isPinned);
     try {
       await axios.patch(`/api/conversations/${profile.id}`);
       router.refresh();
     } catch (error) {
-      toast.error(`Failed to pin conversation : ${error}`);
+      setPinned(isPinned);
+      toast.error(`Failed to toggle conversation: ${error}`);
     }
   };
 
