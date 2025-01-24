@@ -14,6 +14,7 @@ interface SidebarItemProps {
   imageUrl: string;
   name: string;
   type: 'server' | 'conversation';
+  channelId?: string;
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
@@ -21,13 +22,14 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   imageUrl,
   name,
   type,
+  channelId,
 }) => {
   const params = useParams();
   const router = useRouter();
 
   const onClick = () => {
-    if (type === 'server') {
-      router.push(`/servers/${id}`);
+    if (type === 'server' && channelId) {
+      router.push(`/servers/${id}/channels/${channelId}`);
     } else {
       router.push(`/conversations/${id}`);
     }

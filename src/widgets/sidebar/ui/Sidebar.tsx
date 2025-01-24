@@ -24,6 +24,16 @@ const Sidebar = async () => {
         },
       },
     },
+    include: {
+      channels: {
+        where: {
+          name: 'general',
+        },
+        select: {
+          id: true,
+        },
+      },
+    },
   });
 
   const conversations = await db.conversation.findMany({
@@ -69,6 +79,7 @@ const Sidebar = async () => {
               name={server.name}
               imageUrl={server.imageUrl}
               type="server"
+              channelId={server.channels[0].id}
             />
           </div>
         ))}

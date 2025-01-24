@@ -29,20 +29,18 @@ const ServerPage: React.FC<ServerPageProps> = async ({ params }) => {
         where: {
           name: 'general',
         },
-        orderBy: {
-          createdAt: 'asc',
+        select: {
+          id: true,
         },
       },
     },
   });
 
-  const initialChannel = server?.channels[0];
-
-  if (initialChannel?.name !== 'general') {
+  if (!server) {
     return null;
   }
 
-  return redirect(`/servers/${serverId}/channels/${initialChannel?.id}`);
+  return redirect(`/servers/${serverId}/channels/${server.channels[0].id}`);
 };
 
 export default ServerPage;

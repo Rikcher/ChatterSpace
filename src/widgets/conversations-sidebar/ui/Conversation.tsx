@@ -45,7 +45,7 @@ const Conversation: React.FC<ConversationProps> = ({
       await axios.patch(`/api/conversations/${profile.id}`);
       router.refresh();
     } catch (error) {
-      toast.error(`Failed to toggle pin: ${error}`);
+      toast.error(`Failed to pin conversation : ${error}`);
     }
   };
 
@@ -58,7 +58,7 @@ const Conversation: React.FC<ConversationProps> = ({
     <Button
       onClick={onClick}
       className={cn(
-        'group px-2 py-2 mb-2 rounded-md flex items-center gap-2 w-full bg-transparent text-foreground/60 justify-start hover:bg-foreground/5 [&_svg]:pointer-events-auto',
+        'group relative px-2 py-2 mb-2 rounded-md flex items-center gap-2 w-full bg-transparent text-foreground/60 justify-start hover:bg-foreground/5 [&_svg]:pointer-events-auto',
         profile.id === params.profileId
           ? 'bg-foreground/20 text-foreground hover:bg-foreground/20'
           : 'hover:bg-foreground/5'
@@ -80,11 +80,11 @@ const Conversation: React.FC<ConversationProps> = ({
         {profile.username}
       </p>
       <div className="ml-auto flex items-center gap-2">
-        <ActionTooltip label="Pin conversation">
+        <ActionTooltip label="Pin">
           <Pin
             onClick={(e) => onToggle(e)}
             className={cn(
-              'hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors ml-auto',
+              'hidden group-hover:block w-4 h-4 text-foreground/60 hover:text-foreground transition-colors',
               isPinned && 'block text-foreground'
             )}
           />
