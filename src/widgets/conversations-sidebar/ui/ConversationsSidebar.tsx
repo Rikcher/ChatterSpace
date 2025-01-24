@@ -24,7 +24,7 @@ const ConversationsSidebar = async () => {
   });
 
   return (
-    <div className="flex flex-col h-full w-full bg-card-shade p-3">
+    <div className="flex flex-col h-full w-full bg-card-shade px-3">
       <ConversationsHeader />
       <ScrollArea className="flex-1">
         {!!conversations?.length && (

@@ -7,7 +7,7 @@ import { Plus } from 'lucide-react';
 
 const ConversationsHeader = () => {
   return (
-    <div className="flex items-center justify-between pb-2">
+    <div className="flex items-center justify-between pb-2 mt-3">
       <p className="text-xs font-semibold text-foreground/60">
         Direct Messages
       </p>

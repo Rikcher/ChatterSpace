@@ -1,6 +1,3 @@
-import React from 'react';
+import { SelectConversationPage } from '@/views/select-conversation';
 
-const Page = () => {
-  return <div>Page</div>;
-};
-export default Page;
+export default SelectConversationPage;
