@@ -13,6 +13,7 @@ import {
 import { useModal } from '@/shared/lib/hooks';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 const DeleteServerModal: React.FC = ({}) => {
   const { isOpen, onClose, type, data } = useModal();
@@ -62,7 +63,14 @@ const DeleteServerModal: React.FC = ({}) => {
               onClick={onClick}
               variant="destructive"
             >
-              Confirm
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="animate-spin" />
+                  Please wait
+                </div>
+              ) : (
+                'Confirm'
+              )}
             </Button>
           </div>
         </DialogFooter>

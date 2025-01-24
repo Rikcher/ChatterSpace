@@ -15,6 +15,7 @@ import {
 import { useMessages } from '@/features/chat/queries/useMessages';
 import { useMessagesStore } from '@/features/chat/store/MessagesStore';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const DeleteMessageModal: React.FC = ({}) => {
   const { isOpen, onClose, type, data } = useModal();
@@ -26,6 +27,7 @@ const DeleteMessageModal: React.FC = ({}) => {
 
   const onClick = async () => {
     try {
+      setIsLoading(true);
       let url;
 
       if (serverId && channelId) {
@@ -51,8 +53,6 @@ const DeleteMessageModal: React.FC = ({}) => {
         console.error('Invalid url configuration!');
         return;
       }
-
-      setIsLoading(true);
 
       await axios.delete(url);
 
@@ -95,7 +95,14 @@ const DeleteMessageModal: React.FC = ({}) => {
               onClick={onClick}
               variant="destructive"
             >
-              Confirm
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="animate-spin" />
+                  Please wait
+                </div>
+              ) : (
+                'Confirm'
+              )}
             </Button>
           </div>
         </DialogFooter>

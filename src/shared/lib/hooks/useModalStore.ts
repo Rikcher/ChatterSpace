@@ -14,7 +14,8 @@ export type ModalType =
   | 'messageFile'
   | 'deleteMessage'
   | 'deleteFile'
-  | 'deleteConversation';
+  | 'deleteConversation'
+  | 'createDm';
 
 interface ModalData {
   server?: Server;

@@ -12,6 +12,7 @@ import {
   DialogTitle,
 } from '@/shared/shadcn-ui';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const DeleteConversationModal: React.FC = ({}) => {
   const { isOpen, onClose, type, data } = useModal();
@@ -23,6 +24,7 @@ const DeleteConversationModal: React.FC = ({}) => {
 
   const onClick = async () => {
     try {
+      setIsLoading(true);
       const url = `/api/conversations/${profileId}`;
 
       await axios.delete(url);
@@ -61,7 +63,14 @@ const DeleteConversationModal: React.FC = ({}) => {
               onClick={onClick}
               variant="destructive"
             >
-              Confirm
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="animate-spin" />
+                  Please wait
+                </div>
+              ) : (
+                'Confirm'
+              )}
             </Button>
           </div>
         </DialogFooter>
