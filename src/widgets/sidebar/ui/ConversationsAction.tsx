@@ -25,7 +25,7 @@ const ConversationsAction: React.FC = ({}) => {
             isActive && 'rounded-[16px] bg-primary text-background'
           )}
         >
-          <MessageCircle size={20} />
+          <MessageCircle size={20} strokeWidth={2.5} />
         </Button>
       </ActionTooltip>
     </div>
