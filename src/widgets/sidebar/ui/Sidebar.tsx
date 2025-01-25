@@ -7,10 +7,10 @@ import AddServerAction from './AddServerAction';
 import ConversationsAction from './ConversationsAction';
 import SidebarItem from './SidebarItem';
 import { ThemeToggle } from '@/shared/ui/theme-toggle';
-import { UserControl, currentProfile } from '@/entities/user';
+import { UserControl, profileWithConversations } from '@/entities/user';
 
 const Sidebar = async () => {
-  const profile = await currentProfile();
+  const profile = await profileWithConversations();
 
   if (!profile) {
     return redirect('/');

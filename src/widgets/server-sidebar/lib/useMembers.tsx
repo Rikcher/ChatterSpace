@@ -17,7 +17,7 @@ const useMembers = (server: ServerWithMembersWithProfiles) => {
         event: '*',
         schema: 'public',
         table: 'Member',
-        // filter: `serverId=eq.${server.id}`,
+        filter: `serverId=eq.${server.id}`,
       },
       async (payload) => {
         console.log(payload);

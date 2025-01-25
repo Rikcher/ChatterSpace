@@ -11,14 +11,16 @@ import { ActionTooltip } from '@/shared/ui/action-tooltip';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { ModalType, useModal } from '@/shared/lib/hooks/useModalStore';
+import { useConversationsStore } from '@/widgets/conversations-sidebar';
+import { ConversationWithProfiles } from '../store/ConversationsStore';
 
 interface ConversationProps {
   profile: Profile;
   profileId: string;
-  conversation: Conversation;
+  conversation: ConversationWithProfiles;
 }
 
-const Conversation: React.FC<ConversationProps> = ({
+const ConversationItem: React.FC<ConversationProps> = ({
   profile,
   profileId,
   conversation,
@@ -102,4 +104,4 @@ const Conversation: React.FC<ConversationProps> = ({
   );
 };
 
-export default Conversation;
+export default ConversationItem;
