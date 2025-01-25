@@ -21,7 +21,7 @@ const ConversationsAction: React.FC = ({}) => {
         <Button
           onClick={onClick}
           className={cn(
-            'flex m-3 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background-shade hover:bg-primary text-foreground hover:text-background p-0',
+            'flex m-3 mb-1 h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] transition-all duration-300 overflow-hidden items-center justify-center bg-background-shade hover:bg-primary text-foreground hover:text-background p-0',
             isActive && 'rounded-[16px] bg-primary text-background'
           )}
         >

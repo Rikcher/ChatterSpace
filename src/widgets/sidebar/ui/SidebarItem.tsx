@@ -40,9 +40,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       {type === 'server' && (
         <div
           className={cn(
-            'absolute left-0 bg-primary rounded-r-full w-[4px] transition-all duration-300',
+            'absolute left-0 bg-primary rounded-r-full w-[4px] transition-all duration-200',
             params?.serverId !== id && 'group-hover:h-[20px]',
-            params?.serverId === id ? 'h-[36px]' : 'h-[8px]'
+            params?.serverId === id ? 'h-[36px]' : 'h-0'
           )}
         />
       )}

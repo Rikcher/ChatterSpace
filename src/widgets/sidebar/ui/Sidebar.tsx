@@ -70,7 +70,7 @@ const Sidebar = async () => {
             </div>
           );
         })}
-        <Separator className="h-[2px] rounded-md w-10 mx-auto mt-1 mb-3" />
+        <Separator className="h-[2px] rounded-md w-10 mx-auto mt-3" />
         <AddServerAction />
         {servers.map((server) => (
           <div key={server.id} className="my-2">
