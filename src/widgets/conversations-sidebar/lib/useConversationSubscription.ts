@@ -48,7 +48,7 @@ const useConversationSubscription = (profile: ProfileWithConversations) => {
 
         const newConversationWithProfile = {
           ...newConversation,
-          pinned: newConversation.pinned ? newConversation.pinned : [],
+          pinned: newConversation.pinned,
           profileOne:
             newConversation.profileOneId === profile.id
               ? profile
