@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { currentProfile } from '../lib/current-profile';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
 import {
@@ -11,6 +10,8 @@ import {
   PopoverContent,
 } from '@/shared/shadcn-ui';
 import { LogoutButton } from '@/shared/ui/logout-button';
+import UserAvatar from './UserAvatar';
+import ControlContent from './ControlContent';
 
 const UserControl = async () => {
   const profile = await currentProfile();
@@ -19,20 +20,28 @@ const UserControl = async () => {
     return redirect('/login');
   }
 
-  const imageUrl =
-    profile.imageUrl !== '' ? profile.imageUrl : '/noProfileImage.svg';
-
   return (
     <Popover>
       <ActionTooltip label={profile.username} side="right" align="center">
         <PopoverTrigger asChild>
           <Button className="relative flex h-[48px] w-[48px] items-center mx-3 rounded-full overflow-hidden transition duration-300 bg-transparent hover:bg-transparent">
-            <Image fill src={imageUrl} alt="Profile image" sizes="48px" />
+            <UserAvatar
+              src={profile.imageUrl}
+              fallbackName={profile.username}
+              className="h-[48px] w-[48px] md:w-[48px] md:h-[48px]"
+            />
           </Button>
         </PopoverTrigger>
       </ActionTooltip>
-      <PopoverContent side="right" className="bg-background-shade">
-        <LogoutButton />
+      <PopoverContent
+        side="right"
+        align="end"
+        className="bg-background-shade w-[18.75rem] p-0"
+      >
+        <ControlContent
+          imageUrl={profile.imageUrl}
+          fallbackName={profile.username}
+        />
       </PopoverContent>
     </Popover>
   );
