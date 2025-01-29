@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { LiveKitRoom, VideoConference } from '@livekit/components-react';
 import '@livekit/components-styles';
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 interface MediaRoomProps {
   chatId: string;
@@ -19,20 +21,32 @@ const MediaRoom: React.FC<MediaRoomProps> = ({
   name,
 }) => {
   const [token, setToken] = useState('');
+  const router = useRouter();
+  const params = useParams();
+
+  const serverId = params?.serverId as string | undefined;
 
   useEffect(() => {
-    (async () => {
+    const fetchToken = async () => {
       try {
         const resp = await fetch(`/api/token?room=${chatId}&username=${name}`);
         const data = await resp.json();
         setToken(data.token);
       } catch (e) {
-        console.error(e);
+        console.error('Error fetching token:', e);
       }
-    })();
+    };
+
+    fetchToken();
   }, [name, chatId]);
 
-  if (token === '') {
+  const handleDisconnect = () => {
+    if (serverId) {
+      router.push(`/servers/${serverId}`);
+    }
+  };
+
+  if (!token) {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="w-7 h-7 text-foreground/50 animate-spin my-4" />
@@ -40,6 +54,7 @@ const MediaRoom: React.FC<MediaRoomProps> = ({
       </div>
     );
   }
+
   return (
     <LiveKitRoom
       data-lk-theme="default"
@@ -48,6 +63,7 @@ const MediaRoom: React.FC<MediaRoomProps> = ({
       connect={true}
       video={video}
       audio={audio}
+      onDisconnected={handleDisconnect}
     >
       <VideoConference />
     </LiveKitRoom>
