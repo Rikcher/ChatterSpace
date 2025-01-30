@@ -36,7 +36,7 @@ const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="w-full text-md font-semibold px-3 flex items-center h-12 border-none border-b-2 border-border bg-transparent text-foreground hover:bg-foreground/[.08] rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none">
+        <Button className="w-full text-md font-semibold px-3 flex items-center h-12 border-none border-b-2 border-border bg-transparent text-foreground hover:bg-foreground/10 dark:hover:bg-foreground/[.08] rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none">
           {server.name}
           <ChevronDown className="ml-auto w-5 h-5" />
         </Button>

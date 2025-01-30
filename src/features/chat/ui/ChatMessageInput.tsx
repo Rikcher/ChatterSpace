@@ -228,7 +228,7 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
   return (
     <div>
       {!!previewImages.length && (
-        <div className="flex flex-wrap mx-4 gap-6 bg-foreground/10 px-4 py-6 rounded-t-md">
+        <div className="flex flex-wrap mx-4 gap-6 px-4 py-6 rounded-t-md bg-foreground/5 dark:bg-foreground/10">
           {previewImages.map((item, idx) => (
             <AttachmentPreview
               index={idx}
@@ -254,14 +254,14 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
                   <div className="relative px-4 pb-6">
                     <Button
                       type="button"
-                      className="absolute translate-y-1/2 left-8 h-[24px] w-[24px] bg-foreground/50 hover:bg-foreground/80 rounded-full p-1"
+                      className="absolute translate-y-1/2 left-8 h-[24px] w-[24px] bg-foreground/30 hover:bg-foreground/50 dark:bg-foreground/50 dark:hover:bg-foreground/80 rounded-full p-1"
                       onClick={() => fileInputRef.current?.click()}
                     >
                       <Plus className="text-card-shade-2" />
                     </Button>
                     <Textarea
                       className={cn(
-                        'px-14 pt-3.5 bg-foreground/10 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground resize-none overflow-auto scrollbar-custom',
+                        'px-14 pt-3.5 bg-foreground/5 dark:bg-foreground/10 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground resize-none overflow-auto scrollbar-custom',
                         'h-[3rem] max-h-[32.25rem] overflow-y-auto',
                         !!previewImages.length &&
                           'rounded-t-none border-t border-solid border-foreground/10'

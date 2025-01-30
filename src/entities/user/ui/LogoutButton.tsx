@@ -27,7 +27,7 @@ const LogoutButton = () => {
   return (
     <Button
       onClick={logout}
-      className="justify-start bg-foreground/20 text-foreground/90 hover:bg-foreground/30"
+      className="justify-start bg-foreground/10 dark:bg-foreground/20 text-foreground dark:text-foreground/90 hover:bg-foreground/20 dark:hover:bg-foreground/30"
     >
       {loading ? (
         <Loader2 className="w-4 h-4 animate-spin" />

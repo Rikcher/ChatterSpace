@@ -21,7 +21,7 @@ const CreateDmModal: React.FC = ({}) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-card">
+      <DialogContent className="bg-background dark:bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Create Dm</DialogTitle>
           <DialogDescription className="hidden">

@@ -40,7 +40,7 @@ const LeaveServerModal: React.FC = ({}) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-card">
+      <DialogContent className="bg-background dark:bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Leave Server</DialogTitle>
           <DialogDescription>

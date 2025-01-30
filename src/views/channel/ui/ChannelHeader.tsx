@@ -9,7 +9,7 @@ interface ChannelHeaderProps {
 
 const ChannelHeader: React.FC<ChannelHeaderProps> = ({ name, serverId }) => {
   return (
-    <div className="text-md font-semibold px-3 flex gap-2 items-center min-h-12 border-solid border-b-2 border-background/30">
+    <div className="text-md font-semibold px-3 flex gap-2 items-center min-h-12 border-solid border-b-2 border-foreground/20 dark:border-background/30">
       <MobileToggle serverId={serverId} />
       <Hash className="h-5 w-5 text-foreground/40" />
       <p className="font-semibold text-md text-foreground">{name}</p>

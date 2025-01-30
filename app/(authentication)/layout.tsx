@@ -3,6 +3,7 @@
 import React from 'react';
 import { Blob } from '@/shared/ui/blob';
 import Image from 'next/image';
+import { ThemeToggle } from '@/shared/ui/theme-toggle';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         duration={4000}
         className="fixed right-[-300px] bottom-[-800px] z-[-1]"
       />
-      <div className="bg-card rounded-xl px-14 py-16 min-w-[38rem]">
+      <div className="bg-card-shade rounded-xl px-14 py-16 min-w-[38rem]">
         {children}
       </div>
       <div className="absolute top-5 left-5 flex gap-3 items-center text-xl font-semibold tracking-wider">
@@ -27,6 +28,13 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           height={32}
         />
         ChatterSpace
+      </div>
+      <div className="absolute top-5 right-5">
+        <ThemeToggle
+          side="bottom"
+          align="end"
+          className="hover:bg-transparent dark:hover:bg-transparent"
+        />
       </div>
     </div>
   );

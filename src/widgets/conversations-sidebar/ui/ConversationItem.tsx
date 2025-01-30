@@ -64,7 +64,7 @@ const ConversationItem: React.FC<ConversationProps> = ({
       className={cn(
         'group px-2 py-2 mb-2 rounded-md flex items-center gap-2 w-full bg-transparent text-foreground/60 justify-start hover:bg-foreground/5 [&_svg]:pointer-events-auto',
         profile.id === params.profileId
-          ? 'bg-foreground/20 text-foreground hover:bg-foreground/20'
+          ? 'bg-foreground/10 hover:bg-foreground/10 dark:bg-foreground/20 text-foreground dark:hover:bg-foreground/20'
           : 'hover:bg-foreground/5'
       )}
     >

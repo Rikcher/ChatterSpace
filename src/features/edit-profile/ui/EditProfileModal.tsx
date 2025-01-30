@@ -21,7 +21,7 @@ const EditProfileModal: React.FC = ({}) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-card">
+      <DialogContent className="bg-background dark:bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Edit Profile</DialogTitle>
           <DialogDescription className="hidden">

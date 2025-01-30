@@ -29,7 +29,7 @@ const ManageMembersModal: React.FC = ({}) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-card">
+      <DialogContent className="bg-background dark:bg-card">
         <DialogHeader className="mb-5">
           <DialogTitle>Manage Members</DialogTitle>
           <DialogDescription>

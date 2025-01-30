@@ -19,7 +19,7 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({ onChange }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Smile className="text-foreground/50 hover:text-foreground/80 transition-colors" />
+        <Smile className="text-foreground/30 hover:text-foreground/50 dark:text-foreground/50 dark:hover:text-foreground/80 transition-colors" />
       </PopoverTrigger>
       <PopoverContent
         side="top"

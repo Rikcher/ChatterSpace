@@ -5,14 +5,14 @@ import { Button } from '@/shared/shadcn-ui';
 import { cn } from '@/shared/lib/utils';
 import Image from 'next/image';
 import { toast } from 'sonner';
-import { login, oAuthSignIn } from '@app/(authentication)/login/actions';
+import { oAuthSignIn } from '@app/(authentication)/login/actions';
 
-interface SubmitButtonProps {
+interface OAuthLoginButtonProps {
   provider: 'discord' | 'google';
   className?: string;
 }
 
-const OAuthLoginButton: React.FC<SubmitButtonProps> = ({
+const OAuthLoginButton: React.FC<OAuthLoginButtonProps> = ({
   provider,
   className,
 }) => {
@@ -28,7 +28,7 @@ const OAuthLoginButton: React.FC<SubmitButtonProps> = ({
       onClick={onClick}
       variant="outline"
       className={cn(
-        'text-lg py-5 bg-transparent hover:bg-border/20',
+        'text-lg py-5 bg-transparent border-border hover:bg-border/20 dark:hover:bg-border/20',
         className
       )}
     >
@@ -37,6 +37,7 @@ const OAuthLoginButton: React.FC<SubmitButtonProps> = ({
         alt={`${provider} logo`}
         width={24}
         height={24}
+        className="invert dark:invert-0"
       />
       {`Sign in with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`}
     </Button>

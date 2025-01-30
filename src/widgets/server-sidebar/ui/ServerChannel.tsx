@@ -45,7 +45,7 @@ const ServerChannel: React.FC<ServerChannelProps> = ({
       className={cn(
         'group px-2 py-2 rounded-md flex items-center gap-2 w-full bg-transparent text-foreground/30 justify-start [&_svg]:pointer-events-auto',
         params?.channelId === channel.id
-          ? 'bg-foreground/20 text-foreground hover:bg-foreground/20'
+          ? 'bg-foreground/10 dark:bg-foreground/20 text-foreground hover:bg-foreground/10 dark:hover:bg-foreground/20'
           : 'hover:bg-foreground/5'
       )}
     >

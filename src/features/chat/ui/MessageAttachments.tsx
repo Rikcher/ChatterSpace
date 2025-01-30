@@ -44,8 +44,8 @@ export const MessageAttachments: React.FC<{
               className="object-contain w-full h-full"
             />
             {message.pending && (
-              <div className="absolute w-full h-full top-0 left-0 bg-black/70 flex justify-center items-center">
-                <Loader2 className="animate-spin" />
+              <div className="absolute w-full h-full top-0 left-0 bg-black/30 dark:bg-black/70 flex justify-center items-center">
+                <Loader2 className="animate-spin text-white" />
               </div>
             )}
           </a>
@@ -69,7 +69,7 @@ export const MessageAttachments: React.FC<{
                   }
                   setIsEdited(true);
                 }}
-                className="hidden group-hover/image:flex absolute top-3 right-1 w-8 h-8 items-center justify-center p-2 bg-card text-white hover:bg-destructive border rounded-sm cursor-pointer"
+                className="hidden group-hover/image:flex absolute top-3 right-1 w-8 h-8 items-center justify-center p-2 bg-border dark:bg-card text-white hover:bg-destructive border rounded-sm cursor-pointer"
               >
                 <Trash className="ml-auto w-4 h-4" />
               </div>

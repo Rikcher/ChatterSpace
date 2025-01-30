@@ -78,7 +78,7 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
 
   return (
     <div
-      className="flex-1 flex flex-col py-4 overflow-y-auto ml-4 mr-2 mb-2 scrollbar-custom"
+      className="flex-1 flex flex-col py-4 overflow-y-auto ml-4 mr-2 mb-2 scrollbar-custom-light dark:scrollbar-custom"
       ref={scrollAreaRef}
     >
       <div className="flex flex-col-reverse mt-auto justify-end">
