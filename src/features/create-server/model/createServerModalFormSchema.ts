@@ -1,7 +1,10 @@
 import { z } from 'zod';
 
 export const createServerModalFormSchema = z.object({
-  name: z.string().min(1, { message: 'Server name is required' }),
+  name: z
+    .string()
+    .min(1, { message: 'Server name is required' })
+    .max(20, { message: 'Server name must be at most 20 characters long' }),
   image: z
     .any()
     .refine((value) => value !== null && value !== undefined, {

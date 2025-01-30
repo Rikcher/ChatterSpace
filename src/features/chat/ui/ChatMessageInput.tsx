@@ -186,8 +186,20 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
     const files = event.target.files;
     if (files) {
       const fileList = Array.from(files);
-      setFiles(fileList);
-      const filePreviews = Array.from(files).map((file) => {
+
+      const totalFiles = fileList.length + (previewImages.length || 0);
+
+      if (totalFiles > 5) {
+        toast.error('You can only attach up to 5 files.');
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+        return;
+      }
+
+      setFiles((prevFiles) => [...(prevFiles || []), ...fileList]);
+
+      const filePreviews = fileList.map((file) => {
         return { url: URL.createObjectURL(file), name: file.name };
       });
       setPreviewImages((prev) => [...prev, ...filePreviews]);

@@ -1,7 +1,14 @@
 import { z } from 'zod';
 
 export const editProfileModalFormSchema = z.object({
-  name: z.string().min(1, { message: 'Profile name is required' }),
+  name: z
+    .string()
+    .min(3, 'Username must be at least 3 characters long')
+    .max(20, 'Username must be at most 20 characters long')
+    .regex(
+      /^[a-zA-Z0-9_\s]+$/,
+      'Username can only contain letters, numbers, underscores, and spaces'
+    ),
   image: z
     .any()
     .refine((value) => value !== null && value !== undefined, {
