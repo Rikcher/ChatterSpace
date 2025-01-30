@@ -34,17 +34,17 @@ export const MessageAttachments: React.FC<{
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48"
+            className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center justify-center bg-card-shade w-48 h-48 max-w-48 max-h-48"
           >
             <Image
-              sizes="h-48 w-48"
               src={fileUrl}
               alt="Attachment image"
-              fill
-              className="object-cover"
+              width={192}
+              height={192}
+              className="object-contain w-full h-full"
             />
             {message.pending && (
-              <div className="absolute w-48 h-48 top-0 left-0 bg-black/70 flex justify-center items-center">
+              <div className="absolute w-full h-full top-0 left-0 bg-black/70 flex justify-center items-center">
                 <Loader2 className="animate-spin" />
               </div>
             )}
