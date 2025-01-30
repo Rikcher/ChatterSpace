@@ -27,7 +27,7 @@ export const MessageAttachments: React.FC<{
   if (isDeleted) return null;
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex flex-wrap gap-2 items-center max-w-full">
       {attachments.map((fileUrl) => (
         <div key={fileUrl} className="relative group/image">
           <a
