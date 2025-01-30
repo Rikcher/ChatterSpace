@@ -23,10 +23,11 @@ import {
 } from '@/shared/shadcn-ui';
 import { InputField } from '@/shared/ui/input-field';
 import { SubmitButton } from '@/shared/ui/submit-button';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useParams, useRouter } from 'next/navigation';
 import { useModal } from '@/shared/lib/hooks';
 import { ChannelType } from '@prisma/client';
+import { toast } from 'sonner';
 
 const CreateChannelModalForm: React.FC = () => {
   const router = useRouter();
@@ -65,7 +66,9 @@ const CreateChannelModalForm: React.FC = () => {
       router.refresh();
       onClose();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data || 'Something went wrong'}`);
+      }
     }
   };
 

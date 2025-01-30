@@ -21,9 +21,10 @@ import {
   ShieldCheck,
   ShieldQuestion,
 } from 'lucide-react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/shared/lib/hooks';
+import { toast } from 'sonner';
 
 interface ManageMemberActionProps {
   member: Member;
@@ -53,7 +54,9 @@ const ManageMemberAction: React.FC<ManageMemberActionProps> = ({
       router.refresh();
       onOpen('members', { server: response.data });
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data || 'Something went wrong'}`);
+      }
     } finally {
       setLoadingId('');
     }

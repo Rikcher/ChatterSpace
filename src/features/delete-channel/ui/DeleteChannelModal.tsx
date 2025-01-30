@@ -11,9 +11,10 @@ import {
   DialogTitle,
 } from '@/shared/shadcn-ui';
 import { useModal } from '@/shared/lib/hooks';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import qs from 'query-string';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const DeleteChannelModal: React.FC = ({}) => {
   const { isOpen, onClose, type, data } = useModal();
@@ -38,7 +39,9 @@ const DeleteChannelModal: React.FC = ({}) => {
       onClose();
       router.refresh();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data || 'Something went wrong'}`);
+      }
     } finally {
       setIsLoading(false);
     }

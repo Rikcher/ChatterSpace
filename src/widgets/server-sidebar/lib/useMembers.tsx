@@ -20,7 +20,6 @@ const useMembers = (server: ServerWithMembersWithProfiles) => {
         filter: `serverId=eq.${server.id}`,
       },
       async (payload) => {
-        console.log(payload);
         const newMember = payload.new as Member;
         // @ts-ignore
         const oldMemberId = payload.old.id as string;

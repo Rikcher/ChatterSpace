@@ -44,7 +44,6 @@ const CreateDmModalForm: React.FC = () => {
       onClose();
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
         toast.error(`${error.response?.data || 'Something went wrong'}`);
       }
     }

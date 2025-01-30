@@ -13,7 +13,8 @@ import {
 } from '@/shared/shadcn-ui';
 import { Check, Copy, RefreshCw } from 'lucide-react';
 import { useOrigin, useModal } from '@/shared/lib/hooks';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 const InviteModal: React.FC = ({}) => {
   const { isOpen, onClose, onOpen, type, data } = useModal();
@@ -45,7 +46,9 @@ const InviteModal: React.FC = ({}) => {
 
       onOpen('invite', { server: response.data });
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data || 'Something went wrong'}`);
+      }
     } finally {
       setIsLoading(false);
     }

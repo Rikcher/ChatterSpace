@@ -19,8 +19,9 @@ import { InputField } from '@/shared/ui/input-field';
 import { SubmitButton } from '@/shared/ui/submit-button';
 import { SingleImageDropzone } from '@/shared/ui/single-image-dropzone';
 import { uploadImage } from '@/shared/lib/utils';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const InitialServerModalForm: React.FC = () => {
   const router = useRouter();
@@ -59,7 +60,9 @@ const InitialServerModalForm: React.FC = () => {
           router.refresh();
           window.location.reload();
         } catch (error) {
-          console.log(error);
+          if (error instanceof AxiosError) {
+            toast.error(`${error.response?.data || 'Something went wrong'}`);
+          }
         }
       }
     }

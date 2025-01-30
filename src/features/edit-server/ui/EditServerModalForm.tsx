@@ -19,7 +19,7 @@ import { InputField } from '@/shared/ui/input-field';
 import { SubmitButton } from '@/shared/ui/submit-button';
 import { SingleImageDropzone } from '@/shared/ui/single-image-dropzone';
 import { changeImage } from '@/shared/lib/utils';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useModal } from '@/shared/lib/hooks';
 import { toast } from 'sonner';
@@ -85,7 +85,9 @@ const EditServerModalForm: React.FC = () => {
       router.refresh();
       onClose();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(`${error.response?.data || 'Something went wrong'}`);
+      }
     }
   };
 
