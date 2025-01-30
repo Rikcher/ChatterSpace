@@ -9,6 +9,8 @@ import { useMessagesStore } from '../store/MessagesStore';
 import { useScrollHandler } from '../lib/useScrollHandler';
 import { useMessageSubscription } from '../lib/useMessageSubscription';
 import { useDirectMessageSubscription } from '../lib/useDirectMessageSubscription';
+import { useTheme } from 'next-themes';
+import { cn } from '@/shared/lib/utils';
 
 interface ChannelChatProps {
   channelId?: string;
@@ -33,6 +35,7 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
 }) => {
   const scrollAreaRef = useRef<HTMLDivElement | null>(null);
   const { messages, addNextPage } = useMessagesStore();
+  const { theme } = useTheme();
 
   const {
     data,
@@ -78,7 +81,10 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
 
   return (
     <div
-      className="flex-1 flex flex-col py-4 overflow-y-auto ml-4 mr-2 mb-2 scrollbar-custom-light dark:scrollbar-custom"
+      className={cn(
+        'flex-1 flex flex-col py-4 overflow-y-auto ml-4 mr-2 mb-2',
+        theme === 'dark' ? 'scrollbar-custom' : 'scrollbar-custom-light'
+      )}
       ref={scrollAreaRef}
     >
       <div className="flex flex-col-reverse mt-auto justify-end">
