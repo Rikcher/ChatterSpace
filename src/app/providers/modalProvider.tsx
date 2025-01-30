@@ -13,6 +13,7 @@ import { EditChannelModal } from '@/features/edit-channel';
 import { DeleteMessageModal } from '@/features/delete-message';
 import { DeleteConversationModal } from '@/features/delete-conversation';
 import { CreateDmModal } from '@/features/create-dm';
+import { EditProfileModal } from '@/features/edit-profile';
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -39,6 +40,7 @@ export const ModalProvider = () => {
       <DeleteMessageModal />
       <DeleteConversationModal />
       <CreateDmModal />
+      <EditProfileModal />
     </>
   );
 };

@@ -9,7 +9,6 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from '@/shared/shadcn-ui';
-import { LogoutButton } from '@/shared/ui/logout-button';
 import UserAvatar from './UserAvatar';
 import ControlContent from './ControlContent';
 
@@ -38,10 +37,7 @@ const UserControl = async () => {
         align="end"
         className="bg-background-shade w-[18.75rem] p-0"
       >
-        <ControlContent
-          imageUrl={profile.imageUrl}
-          fallbackName={profile.username}
-        />
+        <ControlContent profile={profile} />
       </PopoverContent>
     </Popover>
   );
