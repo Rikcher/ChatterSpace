@@ -27,7 +27,7 @@ const AttachmentPreview: React.FC<ImagePreviewProps> = ({
       <p className="truncate">{item.name}</p>
       <ActionTooltip side="top" label="Remove attachment">
         <div
-          className="absolute -top-2 -right-3 p-2 bg-border/60 dark:bg-background-shade rounded-md hover:bg-border/40 dark:hover:bg-card cursor-pointer"
+          className="absolute -top-2 -right-3 p-2 bg-stone-300 dark:bg-background-shade rounded-md dark:hover:bg-card cursor-pointer"
           onClick={() => onRemove(index)}
         >
           <Trash className="w-5 h-5 text-destructive" />
