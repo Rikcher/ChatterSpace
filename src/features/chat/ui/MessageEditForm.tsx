@@ -154,7 +154,7 @@ const MessageEditForm: React.FC<MessageEditFormProps> = ({
                     {...field}
                     ref={textareaRef}
                     className={cn(
-                      'pt-3.5 bg-foreground/10 border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground resize-none scrollbar-custom border-none',
+                      'pt-3.5 bg-foreground/5 dark:bg-foreground/10 border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground resize-none scrollbar-custom border-none',
                       'h-[3rem] max-h-[32.25rem] overflow-y-auto'
                     )}
                     style={{ lineHeight: '1.3rem' }}
