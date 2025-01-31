@@ -29,7 +29,8 @@ export const initialProfile = async () => {
       username:
         user.user_metadata.username ||
         user.user_metadata?.custom_claims?.global_name ||
-        user.user_metadata.name,
+        user.user_metadata.name ||
+        'Default User',
       imageUrl: user.user_metadata.picture || '',
       email: user.email!,
     },
