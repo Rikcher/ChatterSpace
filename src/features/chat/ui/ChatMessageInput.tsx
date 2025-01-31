@@ -212,6 +212,23 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
       newImages.splice(index, 1);
       return newImages;
     });
+
+    setFiles((prevFiles) => {
+      const newFiles = [...(prevFiles || [])];
+      newFiles.splice(index, 1);
+      return newFiles;
+    });
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+      const newFileList = new DataTransfer();
+      files?.forEach((file, idx) => {
+        if (idx !== index) {
+          newFileList.items.add(file);
+        }
+      });
+      fileInputRef.current.files = newFileList.files;
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
