@@ -36,7 +36,7 @@ const ManageMembersModal: React.FC = ({}) => {
             {server?.members?.length} Members
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="max-h-[420px] pr-6">
+        <ScrollArea className="max-h-[420px] pr-6" noScrollbar>
           {server?.members?.map((member) => (
             <div key={member.id} className="flex items-center gap-2 mb-6">
               <UserAvatar
