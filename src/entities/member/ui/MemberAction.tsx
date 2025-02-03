@@ -26,15 +26,12 @@ import { useRouter } from 'next/navigation';
 import { useModal } from '@/shared/lib/hooks';
 import { toast } from 'sonner';
 
-interface ManageMemberActionProps {
+interface MemberActionProps {
   member: Member;
   server: Server;
 }
 
-const ManageMemberAction: React.FC<ManageMemberActionProps> = ({
-  member,
-  server,
-}) => {
+const MemberAction: React.FC<MemberActionProps> = ({ member, server }) => {
   const router = useRouter();
   const [loadingId, setLoadingId] = useState<string>('');
   const { onOpen } = useModal();
@@ -49,10 +46,7 @@ const ManageMemberAction: React.FC<ManageMemberActionProps> = ({
         },
       });
 
-      const response = await axios.delete(url);
-
-      router.refresh();
-      onOpen('members', { server: response.data });
+      await axios.delete(url);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(`${error.response?.data || 'Something went wrong'}`);
@@ -135,4 +129,4 @@ const ManageMemberAction: React.FC<ManageMemberActionProps> = ({
   );
 };
 
-export default ManageMemberAction;
+export default MemberAction;

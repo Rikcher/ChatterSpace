@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { db } from '@/shared/lib/utils';
 
 import MembersList from './MembersList';
+import MembersHeader from './MembersHeader';
 
 interface ServerMembersSidebarProps {
   serverId: string;
@@ -40,9 +41,7 @@ const ServerMembersSidebar: React.FC<ServerMembersSidebarProps> = async ({
 
   return (
     <div className="flex flex-col h-full w-full bg-card-shade">
-      <p className="text-xs font-semibold text-foreground/60 mt-5 mx-3">
-        {'Members'.toUpperCase()}
-      </p>
+      <MembersHeader server={server} />
       <MembersList server={server} profileId={profile.id} />
     </div>
   );

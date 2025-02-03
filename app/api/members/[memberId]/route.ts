@@ -32,21 +32,11 @@ export async function DELETE(
       },
       data: {
         members: {
-          deleteMany: {
+          delete: {
             id: memberId,
             profileId: {
               not: profile.id,
             },
-          },
-        },
-      },
-      include: {
-        members: {
-          include: {
-            profile: true,
-          },
-          orderBy: {
-            role: 'asc',
           },
         },
       },

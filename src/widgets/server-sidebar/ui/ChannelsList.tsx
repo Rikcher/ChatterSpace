@@ -2,19 +2,14 @@
 
 import React from 'react';
 import { ScrollArea } from '@/shared/shadcn-ui';
-import {
-  Channel,
-  ChannelType,
-  Member,
-  MemberRole,
-  Server,
-} from '@prisma/client';
+import { Channel, ChannelType, MemberRole, Server } from '@prisma/client';
 import ServerSection from './ServerSection';
 import ServerChannel from './ServerChannel';
 import useChannels from '../lib/useChannels';
+import { MemberWithProfile } from '@types';
 
 interface ServerSidebarClientProps {
-  server: Server & { channels: Channel[]; members: Member[] };
+  server: Server & { channels: Channel[]; members: MemberWithProfile[] };
   role: MemberRole;
 }
 

@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Member, Profile } from '@prisma/client';
+import { MemberWithProfile } from '@types';
 import { MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
-import { UserAvatar, roleIconMap } from '@/entities/user';
+import { UserAvatar } from '@/entities/user/@x/member';
+import { roleIconMap } from '../config/maps';
 
 import {
   DropdownMenu,
@@ -14,14 +15,12 @@ import {
   DropdownMenuItem,
 } from '@/shared/shadcn-ui';
 
-interface ServerMemberProps {
-  member: Member & {
-    profile: { imageUrl: string; username: string; id: string };
-  };
+interface MemberProps {
+  member: MemberWithProfile;
   profileId: string;
 }
 
-const ServerMember: React.FC<ServerMemberProps> = ({ member, profileId }) => {
+const Member: React.FC<MemberProps> = ({ member, profileId }) => {
   const router = useRouter();
   const icon = roleIconMap[member.role];
 
@@ -62,4 +61,4 @@ const ServerMember: React.FC<ServerMemberProps> = ({ member, profileId }) => {
   );
 };
 
-export default ServerMember;
+export default Member;

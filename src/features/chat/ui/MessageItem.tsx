@@ -5,7 +5,8 @@ import { MessageWithProfile } from '@types';
 import { useModal } from '@/shared/lib/hooks';
 
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
-import { UserAvatar, roleIconMap } from '@/entities/user';
+import { UserAvatar } from '@/entities/user';
+import { roleIconMap } from '@/entities/member';
 import { MessageContent } from './MessageContent';
 import { MessageAttachments } from './MessageAttachments';
 import { MessageActions } from './MessageActions';

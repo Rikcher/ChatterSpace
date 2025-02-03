@@ -8,8 +8,12 @@ import {
   Conversation,
 } from '@prisma/client';
 
+export type MemberWithProfile = Member & {
+  profile: { imageUrl: string; username: string; id: string; email: string };
+};
+
 export type ServerWithMembersWithProfiles = Server & {
-  members: (Member & { profile: Profile })[];
+  members: MemberWithProfile[];
 };
 
 export type MessageWithProfile = (Message | DirectMessage) & {

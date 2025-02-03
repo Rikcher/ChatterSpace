@@ -16,7 +16,8 @@ export type ModalType =
   | 'deleteFile'
   | 'deleteConversation'
   | 'createDm'
-  | 'editProfile';
+  | 'editProfile'
+  | 'findMember';
 
 interface ModalData {
   server?: Server;
