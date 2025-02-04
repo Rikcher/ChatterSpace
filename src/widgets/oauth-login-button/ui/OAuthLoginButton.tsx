@@ -25,6 +25,7 @@ const OAuthLoginButton: React.FC<OAuthLoginButtonProps> = ({
 
   return (
     <Button
+      data-oauth={provider}
       onClick={onClick}
       variant="outline"
       className={cn(

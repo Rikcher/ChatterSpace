@@ -26,6 +26,7 @@ export default function RootLayout({
         className={`${font.className} antialiased w-100% h-screen overflow-hidden `}
       >
         <Toaster
+          data-testid="toaster"
           position="bottom-center"
           richColors
           toastOptions={{

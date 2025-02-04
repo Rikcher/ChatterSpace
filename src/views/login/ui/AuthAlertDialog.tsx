@@ -57,7 +57,10 @@ const AuthAlertDialog: React.FC = () => {
 
   return (
     <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
-      <AlertDialogContent className="border border-solid border-border">
+      <AlertDialogContent
+        className="border border-solid border-border"
+        data-test="auth-dialog"
+      >
         <AlertDialogHeader>
           <AlertDialogTitle>{dialogContent.title}</AlertDialogTitle>
           <AlertDialogDescription>

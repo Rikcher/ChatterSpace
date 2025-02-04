@@ -54,7 +54,7 @@ const FindMemberModal: React.FC = ({}) => {
           setSearchTerm={setSearchTerm}
         />
         <ScrollArea className="h-[10rem]">
-          <ul className="mt-2 space-y-4">
+          <div className="mt-2 space-y-4">
             {filteredMembers.map((member) => (
               <div
                 key={`${member.id}-search`}
@@ -69,7 +69,7 @@ const FindMemberModal: React.FC = ({}) => {
                 )}
               </div>
             ))}
-          </ul>
+          </div>
         </ScrollArea>
       </DialogContent>
     </Dialog>
