@@ -4,14 +4,13 @@ import React from 'react';
 import { Search } from 'lucide-react';
 import { Button } from '@/shared/shadcn-ui';
 import { ActionTooltip } from '@/shared/ui/action-tooltip';
-import { ServerWithMembersWithProfiles } from '@types';
 import { useModal } from '@/shared/lib/hooks';
 
 interface MembersHeaderProps {
-  server: ServerWithMembersWithProfiles;
+  profileId: string;
 }
 
-const MembersHeader: React.FC<MembersHeaderProps> = ({ server }) => {
+const MembersHeader: React.FC<MembersHeaderProps> = ({ profileId }) => {
   const { onOpen } = useModal();
 
   return (
@@ -19,7 +18,7 @@ const MembersHeader: React.FC<MembersHeaderProps> = ({ server }) => {
       {'Members'.toUpperCase()}
       <ActionTooltip side="left" align="center" label="Find Member">
         <Button
-          onClick={() => onOpen('findMember', { server })}
+          onClick={() => onOpen('findMember', { profileId })}
           className="bg-transparent hover:bg-transparent text-foreground/60 p-0 m-0 flex h-4 w-4"
         >
           <Search />

@@ -3,15 +3,21 @@ import { UserAvatar } from '@/entities/user/@x/member';
 import { roleIconMap } from '../config/maps';
 import MemberAction from './MemberAction';
 import { MemberWithProfile, ServerWithMembersWithProfiles } from '@types';
+import { cn } from '@/shared/lib/utils';
 
 interface MemberControlProps {
   member: MemberWithProfile;
-  server: ServerWithMembersWithProfiles;
+  server?: ServerWithMembersWithProfiles;
+  className?: string;
 }
 
-const MemberControl: React.FC<MemberControlProps> = ({ member, server }) => {
+const MemberControl: React.FC<MemberControlProps> = ({
+  member,
+  server,
+  className,
+}) => {
   return (
-    <div className="flex items-center gap-2 mb-6">
+    <div className={cn('flex items-center gap-2 mb-6', className)}>
       <UserAvatar
         src={member.profile.imageUrl}
         fallbackName={member.profile.username}
@@ -23,7 +29,7 @@ const MemberControl: React.FC<MemberControlProps> = ({ member, server }) => {
         </div>
         <p className="text-xs text-foreground/60">{member.profile.email}</p>
       </div>
-      <MemberAction member={member} server={server} />
+      {server && <MemberAction member={member} server={server} />}
     </div>
   );
 };

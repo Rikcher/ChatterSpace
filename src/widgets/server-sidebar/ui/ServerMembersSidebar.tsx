@@ -41,7 +41,7 @@ const ServerMembersSidebar: React.FC<ServerMembersSidebarProps> = async ({
 
   return (
     <div className="flex flex-col h-full w-full bg-card-shade">
-      <MembersHeader server={server} />
+      <MembersHeader profileId={profile.id} />
       <MembersList server={server} profileId={profile.id} />
     </div>
   );
