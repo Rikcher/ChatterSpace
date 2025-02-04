@@ -91,6 +91,7 @@ const DeleteMessageModal: React.FC = ({}) => {
               Cancel
             </Button>
             <Button
+              data-test="confirm-delete-button"
               disabled={isLoading}
               onClick={onClick}
               variant="destructive"

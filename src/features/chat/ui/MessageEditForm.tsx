@@ -152,6 +152,7 @@ const MessageEditForm: React.FC<MessageEditFormProps> = ({
                 <div className="relative w-full">
                   <Textarea
                     {...field}
+                    data-test="edit-message-input"
                     ref={textareaRef}
                     className={cn(
                       'pt-3.5 bg-foreground/5 dark:bg-foreground/10 border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground resize-none scrollbar-custom border-none',

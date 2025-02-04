@@ -81,13 +81,17 @@ const ChatDisplay: React.FC<ChannelChatProps> = ({
 
   return (
     <div
+      data-test="chat-display-scroll"
       className={cn(
         'flex-1 flex flex-col py-4 overflow-y-auto ml-4 mr-2 mb-2',
         theme === 'dark' ? 'scrollbar-custom' : 'scrollbar-custom-light'
       )}
       ref={scrollAreaRef}
     >
-      <div className="flex flex-col-reverse mt-auto justify-end">
+      <div
+        className="flex flex-col-reverse mt-auto justify-end"
+        data-test="message-list"
+      >
         {messages.map((message) => (
           <MessageItem
             key={message.id}

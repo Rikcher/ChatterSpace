@@ -13,11 +13,16 @@ export const MessageActions: React.FC<{
       <div className="hidden group-hover:flex items-center gap-2 absolute p-1 top-2 right-5 bg-background/80 border rounded-sm">
         {canEditMessage && (
           <ActionTooltip side="top" label="Edit">
-            <Edit onClick={onEdit} className="cursor-pointer ml-auto w-4 h-4" />
+            <Edit
+              data-test="edit-message-button"
+              onClick={onEdit}
+              className="cursor-pointer ml-auto w-4 h-4"
+            />
           </ActionTooltip>
         )}
         <ActionTooltip side="top" label="Delete">
           <Trash
+            data-test="delete-message-button"
             onClick={onDelete}
             className="cursor-pointer ml-auto w-4 h-4 text-destructive"
           />

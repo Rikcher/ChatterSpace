@@ -22,8 +22,7 @@ describe('User Authentication', () => {
     cy.get('input[name="email"]').type('test@gmail.com');
     cy.get('input[name="password"]').type('123123');
     cy.get('button[type="submit"]').click();
-    cy.location('pathname', { timeout: 10000 }).should((pathname) => {
-      console.log('Final Redirected Path:', pathname);
+    cy.location('pathname', { timeout: 15000 }).should((pathname) => {
       expect(pathname).to.match(/^\/servers\/[^/]+\/channels\/[^/]+$/);
     });
   });

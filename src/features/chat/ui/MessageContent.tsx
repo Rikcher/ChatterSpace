@@ -12,6 +12,7 @@ export const MessageContent: React.FC<{
 
   return (
     <p
+      data-test="message-content"
       style={{
         whiteSpace: 'pre-line',
         wordBreak: 'break-word',

@@ -46,8 +46,11 @@ const MessageItem: React.FC<ChatItemProps> = ({
   } = useMessageState(message, role, memberId, profileId);
 
   return (
-    <div className="relative group flex items-center hover:bg-background/5 p-4 transition-colors w-full">
-      <div className="group flex gap-2 items-start w-full">
+    <div
+      className="relative group flex items-center hover:bg-background/5 p-4 transition-colors w-full"
+      data-test="message-item"
+    >
+      <div className="flex gap-2 items-start w-full">
         <div className="cursor-pointer hover:drop-shadiw-md transition-colors">
           <UserAvatar
             src={message.profile.imageUrl}

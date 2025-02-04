@@ -277,6 +277,7 @@ const ChatMessageInput: React.FC<ChannelMessageInputProps> = ({
                       <Plus className="text-card-shade-2" />
                     </Button>
                     <Textarea
+                      data-test="message-input"
                       className={cn(
                         'px-14 pt-3.5 bg-foreground/5 dark:bg-foreground/10 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground resize-none overflow-auto scrollbar-custom',
                         'h-[3rem] max-h-[32.25rem] overflow-y-auto',

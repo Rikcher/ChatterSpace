@@ -39,20 +39,10 @@
 
 Cypress.Commands.add('login', () => {
   cy.visit('/login');
-  cy.get('input[name="email"]').type('testuser@example.com');
-  cy.get('input[name="password"]').type('password123');
+  cy.get('input[name="email"]').type('test@gmail.com');
+  cy.get('input[name="password"]').type('123123');
   cy.get('button[type="submit"]').click();
-  cy.url().should('include', '/channels');
-});
-
-Cypress.Commands.add('loginWithAnotherUser', () => {
-  cy.visit('/login');
-  cy.get('input[name="email"]').type('anotheruser@example.com');
-  cy.get('input[name="password"]').type('password123');
-  cy.get('button[type="submit"]').click();
-  cy.url().should('include', '/channels');
-});
-
-Cypress.Commands.add('getByDataTest', (selector) => {
-  return cy.get(`[data-test="${selector}"]`);
+  cy.location('pathname', { timeout: 15000 }).should((pathname) => {
+    expect(pathname).to.match(/^\/servers\/[^/]+\/channels\/[^/]+$/);
+  });
 });
