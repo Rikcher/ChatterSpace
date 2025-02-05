@@ -48,11 +48,11 @@ describe('User Registration', () => {
     cy.get('input[name="options.data.username"]').type('validusername123');
     cy.get('input[name="password"]').type('ValidPass123!');
     cy.get('input[name="passwordRepeat"]').type('ValidPass123!');
-    cy.getByDataTest('auth-dialog').should('not.exist');
+    cy.get('[data-test="auth-dialog"]').should('not.exist');
     cy.get('button[type="submit"]').click();
     cy.location('pathname', { timeout: 5000 }).should('eq', '/login');
-    cy.getByDataTest('auth-dialog').should('be.visible');
-    cy.getByDataTest('auth-dialog').should(
+    cy.get('[data-test="auth-dialog"]').should('be.visible');
+    cy.get('[data-test="auth-dialog"]').should(
       'contain.text',
       "We've sent you a confirmation email. Please check your inbox and click the verification link to complete your registration."
     );
@@ -65,7 +65,7 @@ describe('User Registration', () => {
     cy.get('input[name="password"]').type('ValidPass123!');
     cy.get('input[name="passwordRepeat"]').type('DifferentPass456!');
     cy.get('button[type="submit"]').click();
-    cy.getByDataTest('form-error-message').should(
+    cy.get('[data-test="form-error-message"]').should(
       'contain.text',
       'Passwords do not match.'
     );
@@ -78,7 +78,7 @@ describe('User Registration', () => {
     cy.get('input[name="password"]').type('ValidPass123!');
     cy.get('input[name="passwordRepeat"]').type('ValidPass123!');
     cy.get('button[type="submit"]').click();
-    cy.getByDataTest('form-error-message').should(
+    cy.get('[data-test="form-error-message"]').should(
       'contain.text',
       'Please enter a valid email address (e.g., name@example.com).'
     );
@@ -91,7 +91,7 @@ describe('User Registration', () => {
     cy.get('input[name="password"]').type('ValidPass123!');
     cy.get('input[name="passwordRepeat"]').type('ValidPass123!');
     cy.get('button[type="submit"]').click();
-    cy.getByDataTest('form-error-message').should(
+    cy.get('[data-test="form-error-message"]').should(
       'contain.text',
       'Username must be at least 3 characters long'
     );
@@ -104,7 +104,7 @@ describe('User Registration', () => {
     cy.get('input[name="password"]').type('weakpassword');
     cy.get('input[name="passwordRepeat"]').type('weakpassword');
     cy.get('button[type="submit"]').click();
-    cy.getByDataTest('form-error-message').should(
+    cy.get('[data-test="form-error-message"]').should(
       'contain.text',
       'Password must contain at least one uppercase letter.'
     );
@@ -117,7 +117,7 @@ describe('User Registration', () => {
     cy.get('input[name="password"]').type('ValidPass123!');
     cy.get('input[name="passwordRepeat"]').type('ValidPass123!');
     cy.get('button[type="submit"]').click();
-    cy.getByDataTest('form-error-message').should(
+    cy.get('[data-test="form-error-message"]').should(
       'contain.text',
       'Username can only contain letters, numbers, underscores, and spaces'
     );
