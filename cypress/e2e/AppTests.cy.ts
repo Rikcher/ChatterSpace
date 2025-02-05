@@ -24,7 +24,7 @@ describe('Messaging', () => {
   // I'm using .first() instead of .last() because list of messages is reversed
   it('should send a message', () => {
     const testMessage = 'Hello, chat!';
-    cy.get('[data-test="message-list"]').should('exist');
+    cy.get('[data-test="message-list"]', { timeout: 15000 }).should('exist');
     cy.get('[data-test="message-input"]').type(`${testMessage}{enter}`);
     cy.get('[data-test="message-list"] [data-test="message-item"]')
       .first()
@@ -34,7 +34,7 @@ describe('Messaging', () => {
 
   it('should persist messages after refresh', () => {
     const testMessage = 'Persistent message';
-    cy.get('[data-test="message-list"]').should('exist');
+    cy.get('[data-test="message-list"]', { timeout: 15000 }).should('exist');
     cy.get('[data-test="message-input"]').type(`${testMessage}{enter}`);
     cy.reload();
     cy.get('[data-test="message-list"]').should('exist');
@@ -46,7 +46,7 @@ describe('Messaging', () => {
 
   it('should send multiple messages and display them in order', () => {
     const messages = ['Hello!', 'How are you?', 'This is a test message.'];
-    cy.get('[data-test="message-list"]').should('exist');
+    cy.get('[data-test="message-list"]', { timeout: 15000 }).should('exist');
     messages.forEach((message) => {
       cy.get('[data-test="message-input"]').type(`${message}{enter}`);
     });

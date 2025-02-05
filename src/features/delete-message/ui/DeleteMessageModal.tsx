@@ -67,7 +67,7 @@ const DeleteMessageModal: React.FC = ({}) => {
     } catch (error) {
       if (error instanceof AxiosError) {
         onClose();
-        toast.error(`Failed to delete file: ${error.response?.data}`);
+        toast.error(`Failed to delete message: ${error.response?.data}`);
       } else {
         toast.error('An unexpected error occurred.');
       }
