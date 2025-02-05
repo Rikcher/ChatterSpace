@@ -18,7 +18,7 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({ page }) => {
         alt="pepeD"
         width={112}
         height={112}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:flex"
       />
     </div>
   );
